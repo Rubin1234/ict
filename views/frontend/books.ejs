@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+    <%- include('../layouts/frontend/head') %>
+    <body class="stretched">
+        <div id="wrapper" class="clearfix">
+            <%- include('../layouts/frontend/top-header') %>
+            <header id="header" class="sticky-style-2">
+                <%- include('../layouts/frontend/mid-header') %>
+                <%- include('../layouts/frontend/menu') %>
+            </header>
+
+<div class="banner">
+   <div class="overlay"></div>
+  <div class="inner-banner container">
+     
+      <div class="inner-banner-title">
+           <h4>Our Books</h4>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active"><a href="">Books</a></li>
+
+          </ol>
+      </div>
+     
+  </div>
+</div>
+
+<div class="listing container mt-4 mb-4" style="margin-top: 50px !important;">
+     <ol class="breadcrumb" >
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active"><a href="#">Books</a></li>
+             <!-- <li class="breadcrumb-item "><a href="">Mind, Body & Spirit</a></li> -->
+          </ol>
+</div>
+
+<div class="container" style="margin-bottom: 65px;">
+  <div class="row">
+    <div class="col-md-3">
+        <div class="listing-aside-filter">
+          <div class="aside-filter-title">
+            <h4>Sub Genre</h4>
+            <hr>
+          </div>
+          <div class="">
+            <% bookSubcategories.forEach(function(data){ %>
+              <div class="form-check pl-0 mb-2">
+                <input type="checkbox" class="form-check-input filled-in bookcheckbox" id="<%= data.subcategory_name %>" subcategory_id="<%= data._id %>" onclick="bookSubcategoryCheckbox()" <% if(data.slug == slug){%> <%= checked %> <% } %>> 
+                <label class="form-check-label small text-uppercase card-link-secondary" for="<%= data.subcategory_name %>"><%= data.subcategory_name %></label>
+              </div>
+            <% }) %>
+ 
+
+          </div>
+
+            
+        </div>
+
+
+                <!-- <div class="listing-aside-filter">
+          <div class="aside-filter-title">
+            <h4>Price</h4>
+            <hr>
+          </div>
+          <div class="">
+        <div class="form-check pl-0 mb-1">
+    <input type="checkbox" class="form-check-input filled-in" id="new">
+    <label class="form-check-label small text-uppercase card-link-secondary" for="new">0-500</label>
+  </div>
+  <div class="form-check pl-0 mb-1">
+    <input type="checkbox" class="form-check-input filled-in" id="used">
+    <label class="form-check-label small text-uppercase card-link-secondary" for="used">500-1000</label>
+  </div>
+  <div class="form-check pl-0 mb-1">
+    <input type="checkbox" class="form-check-input filled-in" id="collectible">
+    <label class="form-check-label small text-uppercase card-link-secondary" for="collectible">1000-1500</label>
+  </div>
+  <div class="form-check pl-0 mb-1">
+    <input type="checkbox" class="form-check-input filled-in" id="renewed">
+    <label class="form-check-label small text-uppercase card-link-secondary" for="renewed">More than 1500</label>
+  </div>
+</div>
+
+            
+        </div> -->
+
+
+        <!-- <div class="listing-aside-filter">
+          <div class="aside-filter-title">
+            <h4>Language</h4>
+            <hr>
+          </div>
+          <div class="">
+        <div class="form-check pl-0 mb-1">
+    <input type="checkbox" class="form-check-input filled-in" id="new">
+    <label class="form-check-label small text-uppercase card-link-secondary" for="new">English</label>
+  </div>
+  <div class="form-check pl-0 mb-1">
+    <input type="checkbox" class="form-check-input filled-in" id="used">
+    <label class="form-check-label small text-uppercase card-link-secondary" for="used">Nepali</label>
+  </div>
+  <div class="form-check pl-0 mb-1">
+    <input type="checkbox" class="form-check-input filled-in" id="collectible">
+    <label class="form-check-label small text-uppercase card-link-secondary" for="collectible">Chinese</label>
+  </div>
+  <div class="form-check pl-0 mb-1">
+    <input type="checkbox" class="form-check-input filled-in" id="renewed">
+    <label class="form-check-label small text-uppercase card-link-secondary" for="renewed">Hindi</label>
+  </div>
+    <div class="form-check pl-0 mb-1">
+    <input type="checkbox" class="form-check-input filled-in" id="renewed">
+    <label class="form-check-label small text-uppercase card-link-secondary" for="renewed">Japanese</label>
+  </div>
+    <div class="form-check pl-0 mb-1">
+    <input type="checkbox" class="form-check-input filled-in" id="renewed">
+    <label class="form-check-label small text-uppercase card-link-secondary" for="renewed">French</label>
+  </div>
+    <div class="form-check pl-0 mb-1">
+    <input type="checkbox" class="form-check-input filled-in" id="renewed">
+    <label class="form-check-label small text-uppercase card-link-secondary" for="renewed">Others</label>
+  </div>
+          </div>
+
+            
+        </div> -->
+<!-- Section: Condition -->
+    </div>
+    <div class="col-md-9">
+      <div class="col-md-12 text-center mt-5 load" style="display: none;">
+        <img src="../../images/loading.gif" >
+      </div>
+      <div class="row book-listing-page">
+       
+
+        <% if(allbooks.length > 0){ %>
+            <% allbooks.forEach(function(data,index){ %>
+              <div class="col-md-3">
+                <div class="new-arrival-books">
+            <img src="../images/backend/products/<%= data.product_image %>" alt="" style="width: 100%;height: 200px;">
+            <% if(data.discount_percent > 0){ %>
+              <div class="showdiscountpercent"><%= data.discount_percent %>% off</div>
+              <% } %>
+             <div class="new-arrival-books-desc">
+             
+              <h4><%= data.product_name %></h4>
+
+              
+              <div>
+              <% for(var i=1; i <= 5; i++){ %>
+
+                <% if(i <= bookReviewArray[index][0]){ %> 
+                  <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 18.25px; height: 18.25px;display: inline-block;padding: 0px;">
+                  <% var j=i; } %>
+                  <% } %>
+  
+                  <% if((bookReviewArray[index][1]) == 0.5 ){ %> 
+                    <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB13svEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 18.25px; height: 18.25px;display: inline-block;padding: 0px;">
+                    <% var j=j+1;  %>
+                <% } %>
+  
+                <% if((bookReviewArray[index][1] ) < 0.5 && (bookReviewArray[index][1] ) != 0 ){ %> 
+                  <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB16MwRdOqAXuNjy1XdXXaYcVXa-64-64.png" style="width: 18.25px; height: 18.25px;display: inline-block;padding: 0px;">
+                  <% var j=j+1;  %>
+              <% } %>
+  
+              <% if((bookReviewArray[index][1] ) >  0.5 ){ %> 
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB14IvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 18.25px; height: 18.25px;display: inline-block;padding: 0px;">
+                <% var j=j+1;  %>
+            <% } %>
+  
+            
+            <% for(var k=j; k < 5; k++){ %>
+             
+              <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB18ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 18.25px; height: 18.25px;display: inline-block;padding: 0px;">
+        
+              <% } %>
+               
+              <% if(bookReviewArray[index][0] == 0){ %>
+                <% for(var i=1; i <= 5  ; i++){ %>
+                  <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB18ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 18.25px; height: 18.25px;display: inline-block;padding: 0px;">
+                  <% } %> 
+                <% } %> 
+
+              </div>
+
+
+
+              <div class="book-price-box d-flex">
+                <% if(data.discount_percent > 0){
+                  var discount_price = 0;
+                  var discount_price = data.discount_percent/100* data.product_price
+                  var discountedAmount = data.product_price - discount_price
+                  %>
+                  <s style="color: #848484;font-family:auto;font-size: 18px;margin-left: auto;
+                  margin-right: auto;padding-top: 2px;">Rs <%= data.product_price %></s> 
+                     <h4 style="margin-left: auto;
+                     margin-right: auto;">Rs. <%= discountedAmount %>
+                   </h4>
+                  <% }else{ %>
+                    <h4 style="margin-left: auto;margin-right: auto;">Rs. <%=  data.product_price %></h4>
+                    <% } %>
+                </div>
+            </div>
+                 <div class="view-book">
+             <a href="../bookdetails/<%= data.slug%>" ><button type="" class="form-control"><i class="icon-line-eye"></i>&nbsp;&nbsp;View Details</button></a>
+             <button type="" class="form-control" productId="<%= data.id %>" onclick="addtobookcart()"><i class="icon-cart-plus"></i>&nbsp;&nbsp;Add to Cart</button>
+            </div>
+          </div>
+          </div>
+           <% }) %>
+          <% }else{ %>
+           
+              <h4 style="margin: auto;">Sorry, No Books Available</h4>
+            
+            <% } %>
+ 
+      </div>
+      <!-- <% if(allbooks.length > 0){ %>
+      <div class="pagination">
+<ul class="pagination pagination-rounded pagination-3d pagination-lg">
+<li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
+<li class="page-item active"><a class="page-link" href="#">1</a></li>
+<li class="page-item"><a class="page-link" href="#">2</a></li>
+<li class="page-item"><a class="page-link" href="#">3</a></li>
+<li class="page-item"><a class="page-link" href="#">4</a></li>
+<li class="page-item"><a class="page-link" href="#">5</a></li>
+<li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+</ul>
+</div>
+<% } %> -->
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<%- include('../layouts/frontend/footer') %>
+      <!-- End Footer -->
+      <!-- Copyright -->
+      <div class=" text-center footer-bottom" >
+         <p class="mt-0 mb-0">&copy; Copyright 2020 <strong style="color: #d14031">Smart Innovation</strong>. All Rights Reserved</p>
+     <!--     <small class="mt-0 mb-0">
+         Made with <i class="mdi mdi-heart text-danger"></i> by <a target="_blank" href="https://giftechies.com/" class="text-warning">Giftechies</a>
+         </small> -->
+      </div>
+
+
+
+</div>
+
+<%- include('../layouts/frontend/script') %>
+</body>
+
+
+
+
+<!-- Mirrored from themes.semicolonweb.com/html/canvas/menu-7.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Jan 2020 08:25:24 GMT -->
+</html>

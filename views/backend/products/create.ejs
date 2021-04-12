@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Mirrored from coderthemes.com/ubold/layouts/default/forms-validation.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jul 2020 07:32:08 GMT -->
+<head>
+        <meta charset="utf-8" />
+        <title>Products | Smart Innovation</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="../../../frontend_images/logo.jpg"/>
+        <meta content="Kitabharu Admin Panel" name="description" />
+        <meta content="Coderthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <%- include('../../layouts/cssfile') %>
+
+    </head>
+
+    <body class="loading">
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Topbar Start -->
+            <%- include('../../layouts/navbar') %>
+            <!-- end Topbar -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+            <%- include('../../layouts/leftsidebar') %>
+            <!-- Left Sidebar End -->
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Dashbard</a></li>
+                                            <li class="breadcrumb-item ">Manage Admin</li>
+                                            <li class="breadcrumb-item ">Admin</li>
+                                            <li class="breadcrumb-item active"><%= title%></li>
+                                        </ol>
+                                    </div>
+                                    <h4 class="page-title"><%= title%></h4>
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title --> 
+                        <% if(messages.error){ %>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert"  id="alertmessage">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            <%= messages.error %>
+                            </div>
+                        <% } %> 
+                        <form role="form" action="/product/store" method="POST" class="parsley-examples" id="parsley-examples" enctype="multipart/form-data" onsubmit="Validation()"> 
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="card-box">
+                                    <h4 class="header-title m-t-0 m-b-20">Product Category & Sub-Category</h4>
+                                    <hr>
+                                     <br>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-3 col-form-label">Category<span class="text-danger">*</span></label>
+                                            <div class="col-7">
+                                                <select  name="product_category" class="selectpicker show-tick" data-style="btn-light" style="border: 1px solid lightgrey;" onchange="changeCategory()" required="">
+                                                    <option value="">Please select category </option>
+                                                    <% if(categories.length > 0){ %>
+                                                        <% categories.forEach(function(data){ %>
+                                                            <option value="<%= data._id %>" category="<%= data.category_name %>"><%= data.category_name %></option>
+                                                    <%  })
+                                                    } %>
+                                                </select>
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                    Select product category</span>
+                                            </div>
+                                        </div>
+                                  
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-3 col-form-label">Sub-Category<span class="text-danger">*</span></label>
+                                            <div class="col-7">
+                                                <select id="subCategoryType"  name="product_subcategory" class="selectpicker show-tick subCategoryType" data-style="btn-light" style="border: 1px solid lightgrey;" onchange="changeSubCategory()" required>
+                                                            <option value="">Please select subcategory </option>
+                                                </select>
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                    Select product sub-category</span>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="card-box">
+                                    <h4 class="header-title m-t-0 m-b-20">Product Details</h4>
+                                    <hr>
+                                <div id="book_type">
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-3 col-form-label">Book Type<span class="text-danger">*</span></label>
+                                        <div class="col-7">
+                                            <div class="checkbox checkbox-success form-check-inline" style="margin-right: 2rem;padding-top: 5.5px;">
+                                                <input type="checkbox" id="booktypeCheckbox1" value="paperbook" name="paperbook" onchange="changePaperbook()">
+                                                <label for="inlineCheckbox1"> Paper Book</label>
+                                            </div>
+                                            <div class="checkbox checkbox-success form-check-inline" style="padding-top: 5.5px;">
+                                                <input type="checkbox" id="booktypeCheckbox2" value="ebook" name="ebook" onchange="changeEbook()">
+                                                <label for="inlineCheckbox2"> E-Book </label>
+                                            </div><br>
+                                            <span id="booktype-error" class="help-block" style="font-weight: normal;color: #f1556c;font-size: 14px;margin-bottom: 0;top: 6px;left: -5px; position: relative;">
+                                             </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div id="e-book">
+                                        
+                                    </div>
+                                    <div id="magazine-volumes" class="mb-4">
+                                        
+                                    </div>
+                        
+
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-3 col-form-label">Product Name<span class="text-danger">*</span></label>
+                                        <div class="col-7">
+                                            <input type="text" required parsley-type="text" class="form-control"
+                                                id="inputEmail1" placeholder="Enter a product name" value="" name="product_name" required>
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                    Please enter a product name. </span>
+                                        </div>
+                                    </div>
+                                    <div id="magazine-volume">
+                                        
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-3 col-form-label">Price<span class="text-danger">*</span></label>
+                                        <div class="col-7">
+                                            <input type="number" required parsley-type="text" class="form-control"
+                                                id="productPrice" placeholder="Enter a product price" value="" name="product_price" required onkeyup="discountPercentByPrice()">
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                    Please enter a product price. </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-3 col-form-label">Discount( in %)</label>
+                                        <div class="col-4">
+                                            <input type="number"  parsley-type="text" class="form-control"
+                                                id="discountPercent" placeholder="Enter a discount %" value="0" name="discount_percent"  onkeyup="discountPercentByPercent()">
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                    Please enter a product price. </span>
+                                        </div>
+                                        <div class="col-4">
+                                            <input type="text"  parsley-type="text" class="form-control"
+                                                id="discountedPrice" placeholder="Discount in price" value="0" name="discount_price" >
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                    Discount Price. </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-3 col-form-label">Quantity (Stock)<span class="text-danger" style="font-size: 16px;">*</span></label>
+                                        <div class="col-7">
+                                            <input type="text" required parsley-type="text" class="form-control"
+                                                id="inputEmail3" placeholder="Enter a stock number" value="" name="stock_number" required>
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                    Please enter a number of stock. </span>
+                                        </div>
+                                    </div>
+                              
+                                 
+                                
+                                 
+                                
+                                    
+                                    <div class="form-group row">
+                                        <label for="hori-pass3" class="col-3 col-form-label">Product Image
+                                            </label>
+                                        <div class="col-7">
+                                            <span id="imgError"></span>
+                                            <input type="file" id="example-fileinput1" class="form-control-file" name="product_image" id="photo" onchange="imageValidation()"> 
+                                            <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                Upload product Image</span>
+                                               
+                                        </div>
+                                    </div>  
+                                    <br>        
+                                    <div class="form-group row">
+                                        <label for="hori-pass3" class="col-3 col-form-label"> Description
+                                            </label>
+                                        <div class="col-8">
+                                            <textarea name="product_description" id="producteditor"  class="form-control" placeholder="Enter content here." ></textarea>
+                                            <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                If u have any information about product. Please provide us above.</span>
+                                        </div>
+                                    </div>
+                                 
+
+                                    <div class="form-group row" style="margin-top: 30px;">
+                                        <div class="col-8 offset-3">
+                                            
+                                            <button type="submit" id="submit" dir="ltr" data-style="slide-up" class="btn btn-blue waves-effect waves-light ladda-button">
+                                                Submit
+                                            </button>
+                                            <button type="reset"
+                                                    class="btn btn-secondary waves-effect m-l-5">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                                
+                                    <!-- <div class="form-group row">
+                                        <label for="inputEmail56" class="col-3 col-form-label">Product Price<span class="text-danger">*</span></label>
+                                        <div class="col-7">
+                                            <input type="text" required parsley-type="text" class="form-control"
+                                                id="inputEmail56" placeholder="Enter an product price" value="" name="product_price" autocomplete="off" min="0" required>
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                    Please enter product price. </span>
+                                        </div>
+                                        
+                                 
+                                    </div> -->
+                                
+                                    <!-- <div class="form-group row">
+                                        <label for="inputEmail3" class="col-3 col-form-label">Product Weight<span class="text-danger">*</span></label>
+                                        <div class="col-4">
+                                            <input type="text"  parsley-type="number" class="form-control"
+                                                id="inputEmail3" placeholder="Enter an product weight" value="" name="product_weight" autocomplete="off" min="0" >
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                    Please enter product weight. You can leave blank if you dont have information. </span>
+                                        </div>
+                                        <div class="col-3">
+                                            <select name="size" class="selectpicker show-tick" data-style="btn-light" style="border: 1px solid lightgrey;">
+                                                <option value="">Select Unit</option>
+                                                <option value="Gram">Gram(g)</option>
+                                                <option value="Kilogram">Kilogram(kg)</option>
+                                                <option value="Kilogram">Square Meter(Sq.m)</option>
+                                    </select>
+                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                        Please select weight unit. </span>
+                                        </div>
+                                    </div> -->
+                                </div>
+
+                                <div class="card-box" style="display: none;">
+                                    <h4 class="header-title m-t-0 m-b-20">Flash Sale</h4>
+                                    <hr>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-3 col-form-label">Flash Sale</label>
+                                        <div class="col-7">
+                                            <select name="flash_sale" class="selectpicker show-tick" data-style="btn-light" style="border: 1px solid lightgrey;" onchange="flashsale()">
+                                    
+                                                        <option value="">No</option>
+                                                        <option value="yes">Yes</option>
+    
+                                    </select>
+                                    <!-- <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                        Choose product brand. You can also leave blank if you dont't have any brand. </span> -->
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="appendFlashsale">
+                                  
+                                    </div>
+                                </div>
+                                
+                                <div class="card-box" style="display: none;">
+                                    <h4 class="header-title m-t-0 m-b-20">Special Offer</h4>
+                                    <hr>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-3 col-form-label">Special Offer</label>
+                                        <div class="col-7">
+                                            <select name="specialoffer_sale" class="selectpicker show-tick" data-style="btn-light" style="border: 1px solid lightgrey;" onchange="specialoffer()">
+                                                        <option value="">No</option>
+                                                        <option value="yes">Yes</option>     
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                
+                                    
+                                    <div id="appendSpecialOffer">
+                                  
+                                    </div>
+                                </div>
+
+                                <div class="card-box" style="display: none;">
+                                    <h4 class="header-title m-t-0 m-b-20">Bulk Offer</h4>
+                                    <hr>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-3 col-form-label">Bulk Offer</label>
+                                        <div class="col-7">
+                                            <select name="bulk_offer" class="selectpicker show-tick" data-style="btn-light" style="border: 1px solid lightgrey;" onchange="bulkdiscount()">
+                                                        <option value="">No</option>
+                                                        <option value="yes">Yes</option>     
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                
+                                    
+                                    <div id="appendBulkDiscount">
+                                  
+                                    </div>
+
+                                </div>
+
+                           
+                               
+                           
+                         
+                          
+
+
+                                
+                            </div> <!-- end col -->
+                            <div class="col-lg-4">
+                                <div class="card-box">
+                                    <h4 class="header-title m-t-0 m-b-20">Status Info</h4>
+                                    <hr>
+                                    <br> 
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-4 col-form-label">Status<span class="text-danger">*</span></label>
+                                        <div class="col-7">
+                                            <select name="status" class="selectpicker show-tick" data-style="btn-light" style="border: 1px solid lightgrey;">
+                                                <option value="Active">Active</option>
+                                                <option value="Inactive">Inactive</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                        <!-- end row -->
+
+                     
+                        <!-- end row -->
+                        
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+
+        </div>
+        <!-- END wrapper -->
+
+        <!-- Right Sidebar -->
+        <%- include('../../layouts/rightsidebar') %> 
+        <!-- /Right-bar -->
+
+        <%- include('../../layouts/script') %>     
+
+        
+    </body>
+
+</html>

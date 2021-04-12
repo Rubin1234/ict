@@ -1,0 +1,120 @@
+<html dir="ltr" lang="en-US">
+    <%- include('../layouts/frontend/head') %>
+    <body class="stretched">
+        <div id="wrapper" class="clearfix">
+            <%- include('../layouts/frontend/top-header') %>
+            <header id="header" class="sticky-style-2">
+                <%- include('../layouts/frontend/mid-header') %>
+                <%- include('../layouts/frontend/menu') %>
+            </header>
+
+<!-- <div class="banner">
+   <div class="overlay"></div>
+  <div class="inner-banner container">
+     
+      <div class="inner-banner-title">
+           <h4>Our Articles</h4>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">Home</a></li>
+            <li class="breadcrumb-item active"><a href="">Articles</a></li>
+          </ol>
+      </div>
+     
+  </div>
+</div>
+ -->
+
+
+ <section class="section" style="width: 100%;">
+    <div class="container blogs">
+        <h3 class="font-weight-bold mb-4">All Orders</h3>
+      <div class="row">
+            <table style="width: 100%;background-color: whitesmoke;">
+                <thead>
+                    <tr>
+                        <th class="py-3 px-4 text-left">Your Order Id</th>
+                        <th class="py-3 px-4 text-left">FullName</th>
+                        <th class="py-3 px-4 text-left">Address</th>
+                        <th class="py-3 px-4 text-left">Phone Number</th>
+                        <th class="py-3 px-4 text-left">Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <script src="../frontend_js/jquery.js"></script>
+                    <% if(orderData.length > 0){  %>
+                        <% orderData.forEach(function(data,index){%>
+                            <% if(data.status == 'completed'){ %>
+                                
+                                <tr style="background-color:#fdfdfd">  
+                                   <td class="border py-3 px-4"> <s><a class="link font-weight-bold" href="/orders/<%= data._id %>" style="font-size: 16px;" id="order_id"><%= index + 1 %> ) &nbsp;&nbsp;<%= data.orderId %></a></s></td>
+                                   <td class="border py-3 px-4"> <s><%= data.fullName %></s></td>
+                                   <td class="border py-3 px-4"> <s><%= data.city %>, <%= data.streetAddress %></s></td>
+                                    <td class="border py-3 px-4"> <s><%= data.phoneNumber %></s></td>
+                                    <td class="border py-3 px-4"> <s> <%= moment(data.createdAt).format('MMM Do hh:mm A') %></s></td>
+                                </tr>
+                            <% }else{ %>
+                                <tr style="background-color:#fdfdfd">  
+                                    <td class="border py-3 px-4"><a class="link font-weight-bold" href="/orders/<%= data._id %>" style="font-size: 16px;" id="order_id"><%= index + 1%> ) &nbsp;&nbsp;<%= data.orderId  %></a></td>
+                                    <td class="border py-3 px-4"> <%= data.fullName %></td>
+                                    <td class="border py-3 px-4"><%= data.city %>, <%= data.streetAddress %></td>
+                                    <td class="border py-3 px-4"><%= data.phoneNumber %></td>
+                                    <td class="border py-3 px-4">   <%= moment(data.createdAt).format('MMM Do hh:mm A') %></td>
+                                </tr>
+                                <% } %>
+                    <%  })  %>
+                    <% }else{ %>
+                        <td class="px-4 py-3">Orders not found</td>
+                    <% } %>
+                </tbody>
+            </table>
+      </div>
+    </div> 
+   </section>
+
+
+
+
+   <%- include('../layouts/frontend/footer') %>
+      <!-- End Footer -->
+      <!-- Copyright -->
+      <div class=" text-center footer-bottom" >
+         <p class="mt-0 mb-0">&copy; Copyright 2020 <strong style="color: #d14031">Smart Innovation</strong>. All Rights Reserved</p>
+     <!--     <small class="mt-0 mb-0">
+         Made with <i class="mdi mdi-heart text-danger"></i> by <a target="_blank" href="https://giftechies.com/" class="text-warning">Giftechies</a>
+         </small> -->
+      </div>
+
+
+
+</div>
+
+<div id="gotoTop" class="icon-angle-up"></div>
+
+
+<%- include('../layouts/frontend/script') %>
+
+<% if(messages.success){ %>
+    <script>
+      $(document).ready(function () {
+        bootoast.toast({
+          message: 'Thank you for purchasing our products.',
+          type: 'success',
+          timeout: 8,
+          dismissable: true
+        });
+
+
+        bootoast.toast({
+          message: 'You can buy other products.',
+          type: 'success',
+          timeout: 10,
+          dismissable: true
+        });
+      });
+
+    </script>
+    <% } %>
+</body>
+
+<!-- Mirrored from themes.semicolonweb.com/html/canvas/menu-7.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Jan 2020 08:25:24 GMT -->
+</html>

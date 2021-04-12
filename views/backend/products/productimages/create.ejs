@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Mirrored from coderthemes.com/ubold/layouts/default/forms-validation.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jul 2020 07:32:08 GMT -->
+<head>
+        <meta charset="utf-8" />
+        <title>Products | Smart Innovation</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="../../../frontend_images/logo.jpg"/>
+        <meta content="Kitabharu Admin Panel" name="description" />
+        <meta content="Coderthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <%- include('../../../layouts/cssfile') %>
+
+    </head>
+
+    <body class="loading">
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Topbar Start -->
+            <%- include('../../../layouts/navbar') %>
+            <!-- end Topbar -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+            <%- include('../../../layouts/leftsidebar') %>
+            <!-- Left Sidebar End -->
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Dashbard</a></li>
+                                            <li class="breadcrumb-item ">Manage Admin</li>
+                                            <li class="breadcrumb-item ">Admin</li>
+                                            <li class="breadcrumb-item active"><%= title%></li>
+                                        </ol>
+                                    </div>
+                                    <h4 class="page-title"><%= title%></h4>
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title --> 
+
+                        <form role="form" action="/product/<%= productId %>/productimages/store" method="POST" class="parsley-examples" id="multipleImageForm" enctype="multipart/form-data" onsubmit="multipleImageFormValidation()"> 
+                        <div class="row">
+                            <div class="col-lg-8">
+                             
+                                <div class="card-box">
+                                    <h4 class="header-title m-t-0 m-b-20">Product Details</h4>
+                                    <hr>
+                                         
+                                
+                                    <div class="form-group row">
+                                        <label for="hori-pass3" class="col-3 col-form-label">Product Image
+                                            <span class="text-danger">*</span></label>
+                                        <div class="col-7">
+                                            <span id="imgError"></span>
+                                            <input type="file" id="example-fileinput1" class="form-control-file" name="product_images"  multiple>
+                                            <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                Upload product Image</span>
+                                        </div>
+                                    </div>
+                               
+                                
+                            
+                          
+                                
+                            
+                              
+                                    <div class="form-group row">
+                                        <div class="col-8 offset-3">
+                                            
+                                            <button type="submit"  dir="ltr" data-style="slide-up" class="btn btn-blue waves-effect waves-light ladda-button">
+                                                Submit
+                                            </button>
+                                            <button type="reset"
+                                                    class="btn btn-secondary waves-effect m-l-5">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                        
+                                </div>
+
+                                
+                            </div> <!-- end col -->
+                            <div class="col-lg-4">
+                                <div class="card-box">
+                                    <h4 class="header-title m-t-0 m-b-20">Status Info</h4>
+                                    <hr>
+                                    <br> 
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-4 col-form-label">Status<span class="text-danger">*</span></label>
+                                        <div class="col-7">
+                                            <select name="status" class="selectpicker show-tick" data-style="btn-light" style="border: 1px solid lightgrey;">
+                                                <option value="Active">Active</option>
+                                                <option value="Inactive">Inactive</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                        <!-- end row -->
+
+                     
+                        <!-- end row -->
+                        
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+
+        </div>
+        <!-- END wrapper -->
+
+        <!-- Right Sidebar -->
+        <%- include('../../../layouts/rightsidebar') %> 
+        <!-- /Right-bar -->
+
+        <%- include('../../../layouts/script') %>     
+
+        
+    </body>
+
+</html>

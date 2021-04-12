@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+    <%- include('../layouts/frontend/head') %>
+    <body class="stretched">
+        <div id="wrapper" class="clearfix">
+            <%- include('../layouts/frontend/top-header') %>
+            <header id="header" class="sticky-style-2">
+                <%- include('../layouts/frontend/mid-header') %>
+                <%- include('../layouts/frontend/menu') %>
+            </header>
+
+<div class="banner">
+   <div class="overlay"></div>
+  <div class="inner-banner container">
+      <div class="inner-banner-title">
+           <h4>Our Videos</h4>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">Home</a></li>
+            <li class="breadcrumb-item active"><a href="">Videos</a></li>
+          </ol>
+      </div>
+     
+  </div>
+</div>
+
+
+<section class="section">
+    <div class="container blogdetails">
+     
+   <div class="postcontent nobottommargin clearfix">
+   <div class="single-post nobottommargin">
+   
+   <div class="entry clearfix">
+   
+   
+   <div class="entry-image">
+   <a href="#"><img src="/images/backend/articles/<%= data.article_image %>" alt="<%= data.article_title %>"></a>
+   </div>
+   
+   
+   <div class="entry-title">
+   <h1 style="margin-bottom: 10px;"><%= data.article_title %></h1>
+   <p style="font-weight: bold;color: white;background-color: #145ba2;display: inline-block;padding: 5px 11px;border-radius: 5px;">2 month ago</p>
+   </div>
+   
+   <!-- <ul class="entry-meta clearfix">
+   <li><i class="icon-calendar3"></i> 10th July 2014</li>
+   
+   </ul> -->
+   
+   <div class="entry-content notopmargin">
+    <p><%= data.article_description %></p>
+   </div>
+   </div>
+   </div>
+   </div>
+   
+   <div class="sidebar nobottommargin col_last clearfix">
+   <div class="sidebar-widgets-wrap">
+   <div class="widget widget-twitter-feed clearfix">
+   <h3>Other Articles</h3>
+   <hr>
+   
+   <% if(otherarticles.length > 0){ %>
+    <% otherarticles.forEach(function(data){ %>
+
+    <a href="/articles/<%= data.slug %>">
+   <div class="sidebar-item">
+     <img src="/images/backend/articles/frontview/<%= data.article_image %>">
+     <h4 style="font-size: 14.8px;"><%= data.article_title %></h4>
+   </div>
+    </a>
+   <% 
+    })
+    } %>
+
+   </div>
+     
+   
+   
+   </div>
+   </div>
+    </div> 
+   </section>
+   
+
+
+
+   <%- include('../layouts/frontend/footer') %>
+      <!-- End Footer -->
+      <!-- Copyright -->
+      <div class=" text-center footer-bottom" >
+         <p class="mt-0 mb-0">&copy; Copyright 2020 <strong style="color: #d14031">Smart Innovation</strong>. All Rights Reserved</p>
+     <!--     <small class="mt-0 mb-0">
+         Made with <i class="mdi mdi-heart text-danger"></i> by <a target="_blank" href="https://giftechies.com/" class="text-warning">Giftechies</a>
+         </small> -->
+      </div>
+
+
+
+</div>
+
+<%- include('../layouts/frontend/script') %>
+</body>
+
+<!-- Mirrored from themes.semicolonweb.com/html/canvas/menu-7.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Jan 2020 08:25:24 GMT -->
+</html>

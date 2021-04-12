@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+    <%- include('../layouts/frontend/head') %>
+    <body class="stretched">
+        <div id="wrapper" class="clearfix">
+            <%- include('../layouts/frontend/top-header') %>
+            <header id="header" class="sticky-style-2">
+                <%- include('../layouts/frontend/mid-header') %>
+                <%- include('../layouts/frontend/menu') %>
+            </header>
+
+<div class="banner">
+   <div class="overlay"></div>
+  <div class="inner-banner container">
+     
+      <div class="inner-banner-title">
+           <h4>Our Publication</h4>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">Home</a></li>
+            <li class="breadcrumb-item active"><a href="">Publication</a></li>
+          </ol>
+      </div>
+     
+  </div>
+</div>
+
+<section class="section" style="padding: 80px 0px;">
+ <div class="container frontend-publication">
+
+     <div class="row" >
+      <div id="oc-images" class="owl-carousel image-carousel carousel-widget" data-margin="35" data-loop="true" data-nav="true"  data-pagi="false"  data-items-xs="1" data-items-sm="3" data-items-lg="4" data-items-xl="5" data-speed="500">
+         
+         
+         <% publicationData.forEach(function(data){ %>
+ 
+    
+         <div class="oc-item" style="padding: 5px;">
+            <a href="/publications/<%= data.slug %>">
+               <div class="new-arrival-books">
+                  <img src="../images/backend/publication/<%= data.publication_image %>" alt="" style="width: 100%;">
+               </div>
+         </a>
+         </div>
+         <% }) %>
+  
+         </div>
+
+     </div>  
+
+   </div>
+ </div> 
+</section>
+
+<%- include('../layouts/frontend/footer') %>
+      <!-- End Footer -->
+      <!-- Copyright -->
+      <div class=" text-center footer-bottom" >
+         <p class="mt-0 mb-0">&copy; Copyright 2020 <strong style="color: #d14031">Smart Innovation</strong>. All Rights Reserved</p>
+     <!--     <small class="mt-0 mb-0">
+         Made with <i class="mdi mdi-heart text-danger"></i> by <a target="_blank" href="https://giftechies.com/" class="text-warning">Giftechies</a>
+         </small> -->
+      </div>
+
+
+
+</div>
+<%- include('../layouts/frontend/script') %>
+</body>
+
+<!-- Mirrored from themes.semicolonweb.com/html/canvas/menu-7.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Jan 2020 08:25:24 GMT -->
+</html>

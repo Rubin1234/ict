@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Mirrored from coderthemes.com/ubold/layouts/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jul 2020 07:27:22 GMT -->
+<head>
+
+        <meta charset="utf-8" />
+        <title>Dashboard | Smart Innovation</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="../../../frontend_images/logo.jpg"/>
+        <meta content="Kitabharu Admin Panel" name="description" />
+        <meta content="Coderthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   
+        <%- include('layouts/cssfile') %>
+
+    </head>
+
+    <body class="loading" data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": false}, "topbar": {"color": "dark"}, "showRightSidebarOnPageLoad": true}'>
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Topbar Start -->
+         <%- include('layouts/navbar') %>
+            <!-- end Topbar -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+            <%- include('layouts/leftsidebar') %>
+            <!-- Left Sidebar End -->
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        
+                        <!-- start page title -->
+                        <!-- <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                 
+                                    <h4 class="page-title">Dashboard</h4>
+                                </div>
+                            </div>
+                        </div>      -->
+                        <!-- end page title --> 
+<!-- 
+                        <div class="row">
+                            <div class="col-md-6 col-xl-3">
+                                <div class="widget-rounded-circle card-box">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div class="avatar-lg rounded-circle bg-soft-primary border-primary border">
+                                                <i class="fe-database avatar-title text-primary" style="font-size: 30px;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-7">
+                                            <div class="text-center">
+                                                <h3 class="mt-1">Categories <span>(2)</span></h3>
+                                                <p class="text-muted mb-1 text-truncate">Total Categories</p>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div> 
+                            </div> 
+
+                            <div class="col-md-6 col-xl-3">
+                                <div class="widget-rounded-circle card-box">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div class="avatar-lg rounded-circle bg-soft-success border-success border">
+                                                <i class="fe-package font-22 avatar-title text-success" style="font-size: 30px;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-7">
+                                            <div class="text-center">
+                                                <h3 class="mt-1">Products <span>(2)</span></h3>
+                                                <p class="text-muted mb-1 text-truncate">Total Products</p>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-xl-3">
+                                <div class="widget-rounded-circle card-box">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div class="avatar-lg rounded-circle bg-soft-info border-info border">
+                                                <i class="fe-book-open font-22 avatar-title text-info" style="font-size: 30px;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-7">
+                                            <div class="text-center">
+                                                <h3 class="mt-1">Articles <span>(2)</span></h3>
+                                                <p class="text-muted mb-1 text-truncate">Total Articles</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-xl-3">
+                                <div class="widget-rounded-circle card-box">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <div class="avatar-lg rounded-circle bg-soft-warning border-warning border">
+                                                <i class="fe-settings font-22 avatar-title text-warning" style="font-size: 30px;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-7">
+                                            <div class="text-center">
+                                                <h3 class="mt-1">Setting</h3>
+                                                <p class="text-muted mb-1 text-truncate">Website Setting</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <!-- Orders -->
+                        <% if(adminType == "Publication"){ %>
+                        <section class="orders light-section">
+                            <div class="mx-auto pt-4">
+                                <h3 class="font-weight-bold mb-3">Book Sold History (<%= admindata.firstname %> <%= admindata.lastname %>)</h3>
+                        
+                          
+                                <table class="" style="width: 100%;background-color: white;text-align: center !important;">
+                                    <thead>
+                                        <tr>
+                                            <th class="px-4 py-3 text-center">S.N</th>
+                                            <th class="px-4 py-3 text-center">Book Name</th>
+                                            <th class="px-4 py-3 text-center">Book Sold (Quantity)</th>
+                                
+                                            <!-- <th class="px-4 py-3 text-center">Status</th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                        <% if(publicationWiseBookSold.length > 0){ %>
+                                            <% publicationWiseBookSold.forEach(function(data,index){ %>
+                                                <tr>
+                                                    <td class="border px-2 py-3"><%= index + 1 %></td>
+                                                    <td class="border px-2 py-3"><span style="background: #6b5ddeeb;
+                                                        color: white;
+                                                        padding: 6px 13px;"><%= data.book_name %></span></td>
+                                                    <td class="border px-2 py-3 font-weight-bold"><%= data.book_sold %> pcs</td>
+                                                </tr>
+
+                                          <%  }) %>
+                                        <% } %>
+              
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                        <% } %>
+
+
+
+                        <% if(adminType == "Sub Admin" || adminType == "Super Admin"){ %>
+                        <section class="orders light-section">
+                            <div class="mx-auto pt-4">
+                                <h3 class="font-weight-bold mb-3">All Orders</h3>
+                        
+                          
+                                <table class="" style="width: 100%;background-color: white;text-align: center !important;">
+                                    <thead>
+                                        <tr>
+                                            <th class="px-4 py-3 text-center">OrderID</th>
+                                            <th class="px-4 py-3 text-center">Customer</th>
+                                            <th class="px-4 py-3 text-center">Contact</th>
+                                            <th class="px-4 py-3 text-center">Address</th>
+                                            <th class="px-2 py-3 text-center">Payment Method</th>
+                                            <th class="px-4 py-3 text-center">Status</th>
+                                            <th class="px-4 py-3 text-center">Placed at</th>
+                                            <!-- <th class="px-4 py-3 text-center">Status</th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody id="orderTableBody">
+                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                        <% } %>
+                        
+                        
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+                <!-- Footer Start -->
+                <!-- <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                2015 - <script>document.write(new Date().getFullYear())</script> &copy; UBold theme by <a href="#">Coderthemes</a> 
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-md-right footer-links d-none d-sm-block">
+                                    <a href="javascript:void(0);">About Us</a>
+                                    <a href="javascript:void(0);">Help</a>
+                                    <a href="javascript:void(0);">Contact Us</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer> -->
+                <!-- end Footer -->
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+
+        </div>
+        <!-- END wrapper -->
+
+        <!-- Right Sidebar -->
+    
+        <!-- /Right-bar -->
+
+        <%- include('layouts/script') %>
+        
+    </body>
+
+<!-- Mirrored from coderthemes.com/ubold/layouts/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jul 2020 07:28:01 GMT -->
+</html>

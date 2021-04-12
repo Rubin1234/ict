@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+    <%- include('../layouts/frontend/head') %>
+    <body class="stretched">
+        <div id="wrapper" class="clearfix">
+            <%- include('../layouts/frontend/top-header') %>
+            <header id="header" class="sticky-style-2">
+                <%- include('../layouts/frontend/mid-header') %>
+                <%- include('../layouts/frontend/menu') %>
+            </header>
+
+<div class="banner">
+   <div class="overlay"></div>
+  <div class="inner-banner container">
+      <div class="inner-banner-title">
+           <h4>Our Videos</h4>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">Home</a></li>
+            <li class="breadcrumb-item active"><a href="">Videos</a></li>
+          </ol>
+      </div>
+     
+  </div>
+</div>
+
+<section class="section" style="padding: 100px 0px;">
+ <div class="container videos">
+   <div class="row">
+      <% if(records.length > 0){ %>
+         <% records.forEach(function(data){ %>
+                
+            <% var a = data.youtube_link.toString() %>
+            <%var b = a.replace("watch?v=", "embed/") %>
+            
+            <div class="col-md-4">
+               <iframe width="100%" height="275" src="<%= b %>" frameborder="0"  allowfullscreen></iframe>
+            </div>
+         <% }) %>
+      <% } %>
+   </div>
+ </div> 
+</section>
+<%- include('../layouts/frontend/footer') %>
+      <!-- End Footer -->
+      <!-- Copyright -->
+      <div class=" text-center footer-bottom" >
+         <p class="mt-0 mb-0">&copy; Copyright 2020 <strong style="color: #d14031">Smart Innovation</strong>. All Rights Reserved</p>
+     <!--     <small class="mt-0 mb-0">
+         Made with <i class="mdi mdi-heart text-danger"></i> by <a target="_blank" href="https://giftechies.com/" class="text-warning">Giftechies</a>
+         </small> -->
+      </div>
+
+
+
+</div>
+
+<%- include('../layouts/frontend/script') %>
+</body>
+
+<!-- Mirrored from themes.semicolonweb.com/html/canvas/menu-7.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Jan 2020 08:25:24 GMT -->
+</html>

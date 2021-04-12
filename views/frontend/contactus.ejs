@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+    <%- include('../layouts/frontend/head') %>
+    <body class="stretched">
+        <div id="wrapper" class="clearfix">
+            <%- include('../layouts/frontend/top-header') %>
+            <header id="header" class="sticky-style-2">
+                <%- include('../layouts/frontend/mid-header') %>
+                <%- include('../layouts/frontend/menu') %>
+            </header>
+
+<div class="banner">
+   <div class="overlay"></div>
+  <div class="inner-banner container">
+     
+      <div class="inner-banner-title">
+           <h4>Contact Us</h4>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">Home</a></li>
+            <li class="breadcrumb-item active"><a href="">Contact Us</a></li>
+          </ol>
+      </div>
+     
+  </div>
+</div>
+
+
+
+   <section class="section bg-white">
+         <div class="container">
+            <div class="row">
+               <% if(messages.success){ %>
+                  <div class="alert alert-success alert-dismissible fade show" role="alert" style="width: 100%;margin-bottom: 20px;" id="customerregistermessage">
+                  <%= messages.success%>
+                  </div>
+               <% } %>
+               
+               <div class="col-lg-4 col-md-4 contact-us">
+                  <div class="section-title" style="border-bottom: none;">
+                     <h2 class="mt-1 mb-5">Get In Touch</h2>
+                  </div>
+                  <h6 class="text-dark"><i class="icon-location"></i> Address :</h6>
+                  <p> <%= setting.location %></p>
+                  <h6 class="text-dark"><i class="icon-phone3"></i> Phone :</h6>
+                  <p> <%= setting.contact %></p>
+             
+                  <h6 class="text-dark"><i class="icon-line-mail"></i> Email :</h6>
+                  <p><%= setting.email %></p>
+                  <h6 class="text-dark"><i class="icon-world"></i> Website :</h6>
+                  <p>www.kitabharu.com</p>
+               </div>
+
+
+               <form class="col-lg-8 col-md-8" action="/contactus/sendmail"  method="POST" name="sentMessage" id="contactForm" >
+                  <div class="section-title" style="border-bottom: none;">
+                     <h2 class="mt-1 mb-5">Contact Us</h2>
+                  </div>
+                  <div class="control-group form-group">
+                     <div class="controls">
+                        <label>Full Name <span class="text-danger">*</span></label>
+                        <input type="text" placeholder="Full Name" name="fullname" class="form-control" id="name"  autocomplete="off" required>
+                        <p class="help-block"></p>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="control-group form-group col-md-6">
+                        <label>Phone Number <span class="text-danger">*</span></label>
+                        <div class="controls">
+                           <input type="tel" placeholder="Phone Number" name="phonenumber" class="form-control" id="phone"  >
+                        </div>
+                     </div>
+                     <div class="control-group form-group col-md-6">
+                        <div class="controls">
+                           <label>Email Address <span class="text-danger">*</span></label>
+                           <input type="email" placeholder="Email Address" name="email"  class="form-control" id="email" required >
+                        </div>
+                     </div>
+                  </div>
+                  <div class="control-group form-group">
+                     <div class="controls">
+                        <label>Message <span class="text-danger">*</span></label>
+                        <textarea rows="4" cols="100" placeholder="Message" name="message"  class="form-control" id="message"  maxlength="999"></textarea>
+                     </div>
+                  </div>
+                  <div id="success"></div>
+                  <!-- For success/fail messages -->
+                  <button type="submit" class="btn btn-secondary btn-lg">Send Message</button>
+               </form>
+            </div>
+         </div>
+      </section>
+
+   <section class="section-map" style="border-top: 4px solid #145ba2;">
+         <div class="map" style="margin-bottom: -6px;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7067.383660958967!2d85.31964989729198!3d27.66500468090022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19da0758c081%3A0x2a3ed12f74626419!2z4KSy4KSX4KSo4KSW4KWH4KSyLCDgpLLgpLLgpL_gpKTgpKrgpYHgpLA!5e0!3m2!1sne!2snp!4v1604505865487!5m2!1sne!2snp" width="100%" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+         </div>
+      </section>
+
+
+
+
+
+
+
+      <%- include('../layouts/frontend/footer') %>
+
+
+
+      <!-- End Footer -->
+      <!-- Copyright -->
+      <div class=" text-center footer-bottom" >
+         <p class="mt-0 mb-0">&copy; Copyright 2020 <strong style="color: #d14031">Smart Innovation</strong>. All Rights Reserved</p>
+     <!--     <small class="mt-0 mb-0">
+         Made with <i class="mdi mdi-heart text-danger"></i> by <a target="_blank" href="https://giftechies.com/" class="text-warning">Giftechies</a>
+         </small> -->
+      </div>
+
+
+
+</div>
+<%- include('../layouts/frontend/script') %>
+</body>
+
+<!-- Mirrored from themes.semicolonweb.com/html/canvas/menu-7.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Jan 2020 08:25:24 GMT -->
+</html>

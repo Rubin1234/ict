@@ -1,0 +1,49 @@
+<div id="gotoTop" class="icon-angle-up"></div>
+
+<!-- <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> -->
+
+<script src="../../../../frontend_js/jquery.js"></script>
+<script src="../../../../frontend_js/plugins.js"></script>
+
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../../../frontend_js/bootoast.min.js"></script>
+<script src="../../../frontend_js/functions.js"></script>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="../../../javascripts/scripts/moment.js" type="text/javascript"></script>
+
+<script src="../../../javascripts/scripts/frontend/book.js"></script>
+<script src="../../../javascripts/scripts/frontend/ebook.js"></script>
+<script src="../../../javascripts/scripts/frontend/stationary.js"></script>
+<script src="../../../javascripts/scripts/frontend/index.js"></script>
+<script src="../../../javascripts/scripts/frontend/accountsetting.js"></script>
+<script src="../../../javascripts/scripts/frontend/cart.js"></script>
+<script src="../../../javascripts/scripts/frontend/postreview.js"></script>
+<script src="../../../javascripts/scripts/frontend/wishlists.js"></script>
+<script src="../../../javascripts/scripts/frontend/order.js"></script>
+<script src="../../../javascripts/scripts/frontend/resetpassword.js"></script>
+<script>
+        $(document).ready(function(){
+            setTimeout(function(){
+                $('#customerregistermessage').remove();    
+            }, 5000);
+
+            //Customer Login Without cookies then show below message
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const parameter = urlParams.get('n')
+            if(parameter == 0){
+                $('#customerloginmessage').css('display','block');
+                setTimeout(function(){
+                    $('#customerloginmessage').remove();     
+                }, 5000);
+            }
+
+
+                        
+
+        });
+</script>

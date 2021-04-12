@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+    <%- include('../layouts/frontend/head') %>
+    <body class="stretched">
+        <div id="wrapper" class="clearfix">
+            <%- include('../layouts/frontend/top-header') %>
+            <header id="header" class="sticky-style-2">
+                <%- include('../layouts/frontend/mid-header') %>
+                <%- include('../layouts/frontend/menu') %>
+            </header>
+
+<div class="banner">
+   <div class="overlay"></div>
+  <div class="inner-banner container">
+     
+      <div class="inner-banner-title">
+           <h4>My Cart</h4>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">Home</a></li>
+            <li class="breadcrumb-item"><a href="">Cart</a></li>
+            <li class="breadcrumb-item active"><a href="">My Payment</a></li>
+          </ol>
+      </div>
+     
+  </div>
+</div>
+
+<div class="listing container mt-4 mb-4">
+    <ol class="breadcrumb" >
+           <li class="breadcrumb-item"><a href="">Home</a></li>
+           <li class="breadcrumb-item"><a href="">Cart</a></li>
+           <!-- <li class="breadcrumb-item "><a href="">Books</a></li> -->
+            <li class="breadcrumb-item active"><a href="">My Payment</a></li>
+         </ol>
+</div>
+
+
+<div class="container">    
+    <div class="row clearfix" style="padding-bottom: 40px;padding-top: 30px;">
+        <div class="col-lg-6 clearfix" >
+            <h3 style="margin-bottom: 15px;color: #145ba2;">Delivery Information</h3>
+            <hr style="margin-bottom: 2rem;">
+
+
+            <form action="/payment/store" method="POST" onsubmit="proceedPayment()">
+         <!-- <form action="https://uat.esewa.com.np/epay/main" method="POST" onsubmit="proceedPayment()"> -->
+            <input value="<%= total %>" name="tAmt" type="hidden">
+            <input value="<%= finalAmount %>" name="amt" type="hidden">
+            <input value="<%= taxCharge %>" name="txAmt" type="hidden">
+            <input value="<%= serviceCharge %>" name="psc" type="hidden">
+            <input value="<%= deliveryCharge %>" name="pdc" type="hidden">
+            <input value="EPAYTEST" name="scd" type="hidden">
+            <input value="<%= esewa_orderID %>" name="pid" type="hidden">
+            <input value="http://127.0.0.1:3000/orders/?q=su" type="hidden" name="su">
+            <input value="http://127.0.0.1:3000/payment/?q=fu" type="hidden" name="fu">
+
+            <!-- <input value="https://kitabharu.herokuapp.com/?q=su" type="hidden" name="su">
+            <input value="https://kitabharu.herokuapp.com/?q=fu" type="hidden" name="fu"> -->
+       
+            <div class="col_full">
+                <h5 style="margin-bottom: 7px;">Full Name</h5>
+                <input type="text" name="fullname" class="sm-form-control" placeholder="Enter You Full Name" id="fullname" />
+                <span id="fullNameErr" style="color: #d14031;"></span>
+            </div>
+            <div class="col_full">
+                <h5 style="margin-bottom: 7px;">Phone Number</h5>
+              <input type="text" name="phonenumber" class="sm-form-control" placeholder="Enter Your Phone Number" id="phoneNumber"/>
+              <span id="phoneNumberErr" style="color: #d14031;"></span>
+            </div>
+        <div class="col_full">
+            <h5 style="margin-bottom: 7px;">City</h5>
+          <select class="sm-form-control" name="city" id="city">
+            <option value="">Select Your City</option>
+            <option value="kathmandu">Kathmandu</option>
+            <option value="bhaktapur">Bhaktapur</option>
+            <option value="lalitpur">Lalitpur</option>
+        </select>
+        <span id="cityErr" style="color: #d14031;"></span>
+        </div>
+    
+        <div class="col_full  col_last" style="margin-bottom:40px;">
+          <h5 style="margin-bottom: 7px;">Street Address</h5>
+        <input type="text" name="street_address" class="sm-form-control" placeholder="Street Address" id="streetAdd"/>
+        <span id="streetAddressErr" style="color: #d14031;"></span>
+        </div>
+
+        <div  class="col_full">
+        <h5 style="margin-bottom: 10px;margin-top: 10px;font-size: 17px;">Choose Your Payment Method</h5>
+        <div class="col_half">
+            <!-- <h5 style="margin-bottom: 7px;">Street Address</h5> -->
+          <input type="radio" class="sm-form-control" value="esewa" placeholder="Street Address"  name="paymentmethod" style="width: 12%;height: 15px;display: inline-block;" id="esewa"/>
+          <img src="frontend_images/footer/esewa.jpg" alt="" width="100px" height="80px" style="margin-right: 25px;">
+          </div>
+          <!-- <div class="col_half col_last">
+          <input type="radio" class="sm-form-control" value="cod" name="paymentmethod" placeholder="Street Address" style="width: 12%;height: 15px;display: inline-block;" id="cod"/>
+          <img src="frontend_images/footer/cod.jpg" alt="" width="100px" height="70px">
+          </div> -->
+          <div  class="col_full">
+            <span id="choosePaymentErr" style="color: #d14031;"></span>
+            </div>
+         
+
+    </div>
+
+      
+     <div class="col_full">
+        <button type="submit" class="button button-3d nomargin" style="margin-top: 10px !important;">Proceed For Payment</button>
+    </div>
+        </form>
+        </div>
+
+
+
+        <div class="col-lg-6 clearfix ordersummary" id="padding-left" >
+            <h3 style="margin-bottom: 15px;color: #145ba2;">Order Summary</h3>
+            <hr style="margin-bottom: 1.2rem;">
+        <div class="table-responsive" style="margin-bottom: 10px;">
+        <table class="table cart">
+        <tbody>
+        <tr class="cart_item">
+        <td class="cart-product-name" style="border-top: none;">
+        <strong>Cart Subtotal</strong>
+        </td>
+        <td class="cart-product-name" style="border-top: none;">
+        <span class="amount" style="color:#145ba2;font-weight: bold;">Rs <%= finalAmount %></span>
+        </td>
+        </tr>
+        <tr class="cart_item">
+        <td class="cart-product-name">
+        <strong>Delivery Charge</strong>
+        </td>
+        <td class="cart-product-name">
+        <span class="amount" style="color:#145ba2;font-weight: bold;">Rs <%= deliveryCharge %></span>
+        </td>
+        </tr>
+        <tr class="cart_item">
+          <td class="cart-product-name">
+          <strong>Service Charge</strong>
+          </td>
+          <td class="cart-product-name">
+          <span class="amount" style="color:#145ba2;font-weight: bold;">Rs <%= serviceCharge %></span>
+          </td>
+          </tr>
+        <tr class="cart_item">
+          <td class="cart-product-name">
+          <strong>Tax</strong>
+          </td>
+          <td class="cart-product-name">
+          <span class="amount" style="color:#145ba2;font-weight: bold;">Rs <%= taxCharge %></span>
+          </td>
+        </tr>
+        <tr class="cart_item">
+        <td class="cart-product-name">
+        <strong  style="font-size: 1.25rem;">Total Amount</strong>
+        </td>
+        <td class="cart-product-name">
+        <span class="amount color lead" style="font-size: 27px;"><strong>Rs  <%= total %></strong></span>
+        </td>
+        </tr>
+        </tbody>
+        </table>
+       
+        </div>
+
+        <!-- <h6 style="font-size: 20px;margin-bottom: 15px;">We Accept</h6>
+        <hr>
+        <img src="frontend_images/footer/esewa.jpg" alt="" width="80px" height="60px" style="margin-right: 25px;">
+        <img src="frontend_images/footer/cod.jpg" alt="" width="70px" height="40px"> -->
+
+
+        </div>
+        </div>
+    </div>
+    <%- include('../layouts/frontend/footer') %>
+      <!-- End Footer -->
+      <!-- Copyright -->
+      <div class=" text-center footer-bottom" >
+         <p class="mt-0 mb-0">&copy; Copyright 2020 <strong style="color: #d14031">Smart Innovation</strong>. All Rights Reserved</p>
+     <!--     <small class="mt-0 mb-0">
+         Made with <i class="mdi mdi-heart text-danger"></i> by <a target="_blank" href="https://giftechies.com/" class="text-warning">Giftechies</a>
+         </small> -->
+      </div>
+
+
+
+</div>
+<%- include('../layouts/frontend/script') %>
+</body>
+
+<!-- Mirrored from themes.semicolonweb.com/html/canvas/menu-7.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Jan 2020 08:25:24 GMT -->
+</html>

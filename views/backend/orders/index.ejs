@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Mirrored from coderthemes.com/ubold/layouts/default/tables-datatables.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jul 2020 07:32:15 GMT -->
+<head>
+        <meta charset="utf-8" />
+        <title>Orders | Smart Innovation</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="../../../frontend_images/logo.jpg"/>
+        <meta content="Kitabharu Admin Panel" name="description" />
+        <meta content="Coderthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+
+        <%- include('../../layouts/cssfile') %>
+
+    </head>
+
+    <body class="loading">
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Topbar Start -->
+            <%- include('../../layouts/navbar') %>
+            <!-- end Topbar -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+            <%- include('../../layouts/leftsidebar') %>
+            <!-- Left Sidebar End -->
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Manage Admins</a></li>
+                                            <li class="breadcrumb-item active"><%= title %></li>
+                                        </ol>
+                                    </div>
+                                    <h4 class="page-title"><%= title %></h4>
+                                </div>
+                            </div>
+                        </div>    
+         
+                        <!-- end page title --> 
+                        <!-- <div style="text-align: right;margin-bottom: 25px;">
+                            <a href="/brand/create"><button type="button" class="btn btn-success waves-effect waves-light" style="background-color: #07ddb2;border-color: #36d7b7;"><i class="fe-plus-circle" style="font-size: 15px;padding-right: 3px;"></i> Add Brand</button></a>
+                        </div> -->
+
+                        <% if(messages.success){ %>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert"  id="alertmessage">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            <%= messages.success%>
+                            </div>
+                        <% } %>
+
+                        <% if(messages.error){ %>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert"  id="alertmessage">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            <%= messages.error %>
+                            </div>
+                        <% } %> 
+                        <div class="row">
+                  
+                            <div class="col-12">
+             
+                                <div class="card">
+                                    <div class="card-body">
+                                        <!-- <h4 class="header-title">Admins List</h4>
+                                        <p class="text-muted font-13 mb-4">
+                                            DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction
+                                            function:
+                                            <code>$().DataTable();</code>. -->
+                                        </p>
+
+                                        <table id="basic-datatable" class="table dt-responsive nowrap w-100" style="font-size: 13.5px;text-align: center;">
+                                            <thead>
+                                                <tr>
+                                                    <th>S.N</th>
+                                                    <th>OrderId</th>
+                                                    <th>Name</th>
+                                                    <th>Address</th>
+                                                    <th>Contact</th>
+                                                    <th>Payment Method</th>
+                                                    <th>Status</th>
+                                                    <th>Placed At</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% if(records.length > 0){
+                                                    var i = 1;
+                                                %>
+                                                <% records.forEach(function(data,index){ %>
+                                                <tr >
+                                                    <td class="py-3"><%= i %></td>
+                                                    <td class="py-3">
+                                                        <p style="font-weight: bold;background: #6ad600eb;color: white;font-style: italic;padding: 9px 10px;border-radius: 2px;width: 100%;font-size: 15px;
+                                                        margin-left: auto;
+                                                        margin-right: auto;"> <%= data.orderId %></p>
+                                                        
+                                                       </td>
+                                                    <td style="font-weight: bold;font-size: 14px;"><%= data.fullName %></td>
+                                                    <td style="font-weight: bold;font-size: 14px;"><%= data.city  %>, <%= data.streetAddress %></td>
+                                                    <td style="font-weight: bold;font-size: 14px;"><%= data.phoneNumber %></td>
+
+                                                    <% if(data.paymentType == 'esewa'){ %>
+                                                    <td><span style="background: #41a124;color: white;padding: 3px 12px;font-size: 18px;font-weight: bold; border-radius: 8px;"><%= data.paymentType %></span></td>
+                                                    <% }else{ %>
+                                                        <td><span style="background: crimson;color: white;padding: 3px 12px;font-size: 18px;font-weight: bold; border-radius: 8px;"><%= data.paymentType %></span></td>
+                                                    <% } %>
+                                                    <td>
+                                                        <form action="updatestatus" method="POST">
+                                                            <input type="hidden" name="orderId" value="<%= data._id %>">
+                                                        <select class="form-control" id="example-select" name="status" onchange="this.form.submit()">
+                                                            <option value="order_placed" <% if(data.status == 'order_placed'){ %> <%=selected%> <% } %> >Placed</option>
+                                                            <option value="confirmed" <% if(data.status == 'confirmed'){ %> <%=selected%> <% } %> >Confirmed</option>
+                                                            <option value="prepared" <% if(data.status == 'prepared'){ %> <%=selected%> <% } %> >Prepared</option>
+                                                            <option value="delivered" <% if(data.status == 'delivered'){ %> <%=selected%> <% } %>>Delivered</option>
+                                                            <option value="completed" <% if(data.status == 'completed'){ %> <%=selected%> <% } %>>Completed</option>
+                                                        </select>
+                                                    </form>
+                                                    </td>
+                                                    <td> <%= moment(data.createdAt).format('MMM Do hh:mm A') %></td>
+                                                    <td>
+                                                       <button type="button" class="btn btn-info waves-effect waves-light" style="padding:0px;" data-toggle="modal" data-target="#centermodal<%= i %>"> <i class="fe-eye" style="color: white;padding: 7px 10px;font-size: 17px;"></i></button>
+                                                         &nbsp;
+                                                         <!-- <a href="/brand/delete/<%= data._id %>"><button type="button" class="btn btn-danger waves-effect waves-light" style="padding:0px;" onclick="if(confirm('Are you sure you want to delete?'))commentDelete(1);return false;"> <i class="fe-trash-2" style="color: white;padding: 7px 10px;font-size: 17px;"></i></button</a> -->
+                                                         </td>
+
+
+
+
+                                                         <!-- Modal -->
+
+                                                      <div class="modal fade" id="centermodal<%= i %>" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                                                <div class="modal-content" style="padding:20px">
+                                                    <div class="modal-header" style="    border-bottom: 1px solid lightgrey;">
+                                                        <h3 class="modal-title font-weight-bold" id="myCenterModalLabel">Order Details</h3>
+                                                     
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-12 mb-3">
+                                                            
+                                                                <h5> <span style="font-weight: bold;">Order Id: </span> <span style="background-color: #4FC6E5;
+                                                                    color: white;
+                                                                    padding: 5px 29px;
+                                                                    margin-left: 15px;
+                                                                    font-size: 17px;
+                                                                    border-radius: 0px;
+                                                                    font-weight: bold;"><%= data.orderId %></span></h5>
+                                                            </div>
+                                                            <br>
+                                                            <div class="col-md-6 mb-2">
+                                                                <h5> <span style="font-weight: bold;">Full Name: </span><%= data.fullName %></h5>
+                                                            </div>
+                                                            <div class="col-md-6 mb-2">
+                                                                <h5><span style="font-weight: bold;">Address: </span><%= data.city  %>, <%= data.streetAddress %></h5> 
+                                                            </div>
+                                                            <div class="col-md-6 mb-2">
+                                                                <h5><span style="font-weight: bold;">Contact: </span> <%= data.phoneNumber %></h5> 
+                                                            </div>
+                                                            <% if(data.paymentType == 'esewa'){ %>
+                                                            <div class="col-md-6 mb-2">
+                                                                <h5><span style="font-weight: bold;">Payment Type: </span> <span style="    background: #6ad600eb;
+                                                                    color: white;
+                                                                    padding: 5px 12px;
+                                                                    margin-left: 9px;
+                                                                    border-radius: 15px;
+                                                                    font-size: 17px;"><%= data.paymentType %></span></h5> 
+                                                            </div>
+                                                            <% }else{ %>
+                                                                    <div class="col-md-6 mb-2">
+                                                                        <h5><span style="font-weight: bold;">Payment Type: </span> <span style="    background: #6ad600eb;
+                                                                            color: white;
+                                                                            padding: 5px 12px;
+                                                                            margin-left: 9px;
+                                                                            border-radius: 15px;
+                                                                            font-size: 17px;"><%= data.paymentType %></span></h5> 
+                                                                    </div>
+                                                                    <% } %>
+
+
+
+                                                            <!-- Status -->
+                                                            <div class="col-md-6 mb-2">
+                                                              <%  if( data.status == 'order_placed'){ %>
+                                                                    <h5><span style="font-weight: bold;">Status: </span><span style="    background: #776ae1;
+                                                                        color: white;
+                                                                        padding: 5px 12px;
+                                                                        margin-left: 9px;
+                                                                        border-radius: 15px;
+                                                                        font-size: 15px;">Order Placed</span></h5> 
+                                                               <% } %>
+                                                               <%  if( data.status == 'confirmed'){ %>
+                                                                <h5><span style="font-weight: bold;">Status: </span><span style="    background: #6ad600eb;
+                                                                    color: white;
+                                                                    padding: 5px 12px;
+                                                                    margin-left: 9px;
+                                                                    border-radius: 15px;
+                                                                    font-size: 15px;">Order Confirmed</span></h5> 
+                                                           <% } %>
+                                                           <%  if( data.status == 'prepared'){ %>
+                                                            <h5><span style="font-weight: bold;">Status: </span><span style="    background: #6ad600eb;
+                                                                color: white;
+                                                                padding: 5px 12px;
+                                                                margin-left: 9px;
+                                                                border-radius: 15px;
+                                                                font-size: 15px;">Order Prepared</span></h5> 
+                                                       <% } %>
+                                                       <%  if( data.status == 'delivered'){ %>
+                                                        <h5><span style="font-weight: bold;">Status: </span><span style="    background: #6ad600eb;
+                                                            color: white;
+                                                            padding: 5px 12px;
+                                                            margin-left: 9px;
+                                                            border-radius: 15px;
+                                                            font-size: 15px;">Order Delivered</span></h5> 
+                                                        <% } %>
+                                                        <%  if( data.status == 'completed'){ %>
+                                                            <h5><span style="font-weight: bold;">Status: </span><span style="    background: #d60000eb;
+                                                                color: white;
+                                                                padding: 5px 12px;
+                                                                margin-left: 9px;
+                                                                border-radius: 15px;
+                                                                font-size: 15px;">Order Completed</span></h5> 
+                                                            <% } %>   
+                                                            </div>
+
+
+                                                            <div class="col-md-6 mb-2">
+                                                                <h5><span style="font-weight: bold;">Placed At: </span> <span style="    background: #fff;
+                                                                    color: #004bb5;font-weight: bold;
+                                                                    padding: 5px 12px;
+                                                                    margin-left: 9px;
+                                                                    border-radius: 15px;
+                                                                    font-size: 15px;"><%= moment(data.createdAt).format('MMM Do hh:mm A') %></span></h5> 
+                                                            </div>
+                                                            <div class="col-md-12 my-3">
+                                                            
+                                                                <h4 class="mb-3"> <span style="font-weight: bold;">Ordered Products: </span><br> </h4>
+                                                                <% data.products.forEach(function(data,index){ %>
+                                                                        <h5><%= index + 1 %>) <%= data.product.product_name %> (<%= data.qty %>pcs)</h5>
+                                                               <% }) %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+                                                </tr>
+                                                <% i++; }) %>
+                                             <% }else{ %>
+                                                    <tr>No Orders Available</tr>
+                                                    <% } %>
+                                            </tbody>
+                                         
+                                        </table>
+
+                                    </div> <!-- end card body-->
+                                </div> <!-- end card -->
+                            </div><!-- end col-->
+                        </div>
+             
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+
+        </div>
+        <!-- END wrapper -->
+
+        <!-- Right Sidebar -->
+        <%- include('../../layouts/rightsidebar') %>
+        <!-- /Right-bar -->
+
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+
+        <%- include('../../layouts/script') %>
+        
+    </body>
+
+<!-- Mirrored from coderthemes.com/ubold/layouts/default/tables-datatables.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jul 2020 07:32:18 GMT -->
+</html>

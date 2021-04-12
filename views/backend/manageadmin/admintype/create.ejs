@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Mirrored from coderthemes.com/ubold/layouts/default/forms-validation.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jul 2020 07:32:08 GMT -->
+<head>
+        <meta charset="utf-8" />
+        <title>Admintype | Smart Innovation</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="../../../frontend_images/logo.jpg"/>
+        <meta content="Kitabharu Admin Panel" name="description" />
+        <meta content="Coderthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <%- include('../../../layouts/cssfile') %>
+
+    </head>
+
+    <body class="loading">
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Topbar Start -->
+            <%- include('../../../layouts/navbar') %>
+            <!-- end Topbar -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+            <%- include('../../../layouts/leftsidebar') %>
+            <!-- Left Sidebar End -->
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Dashbard</a></li>
+                                            <li class="breadcrumb-item ">Manage Admin</li>
+                                            <li class="breadcrumb-item ">Role</li>
+                                            <li class="breadcrumb-item active"><%= title%></li>
+                                        </ol>
+                                    </div>
+                                    <h4 class="page-title"><%= title%></h4>
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title --> 
+
+                    
+                        <!-- end row -->
+
+
+                 
+                        <!-- end row-->
+
+
+                        <div class="row">
+                           
+                            <!-- end col -->
+
+                            <div class="col-lg-8">
+                                <div class="card-box">
+                                    <!-- <h4 class="header-title m-t-0 m-b-20">Add Admin Types</h4>
+                                    <p class="text-mute m-b-50"></p> -->
+                                 <br>
+
+                                    <form role="form" action="store" method="POST" class="parsley-examples" autocomplete="on">
+                                        
+                                        <% if(messages.error){ %>
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert"  id="alertmessage">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                               <%= messages.error %>
+                                            </div>
+                                        <% } %>
+
+                                        <% if(messages.success){ %>
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert"  id="alertmessage">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                               <%= messages.success%>
+                                            </div>
+                                        <% } %>
+
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-4 col-form-label">Admin Type<span class="text-danger">*</span></label>
+                                            <div class="col-7">
+                                                <input type="text" required parsley-type="email" class="form-control"
+                                                       id="inputEmail3" placeholder="Enter a admin type" value="" name="admintype">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-4 col-form-label">Status<span class="text-danger">*</span></label>
+                                            <div class="col-7">
+                                                <select name="status" class="selectpicker show-tick" data-style="btn-light" style="border: 1px solid lightgrey;">
+                                                    <option value="Active">Active</option>
+                                                    <option value="Inactive">Inactive</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                     
+                               
+                                        
+                                        <div class="form-group row" style="margin-top: 25px;">
+                                            <div class="col-8 offset-4">
+                                                <button type="submit" id="changesettingBtn" class="btn btn-primary waves-effect waves-light">
+                                                    Add
+                                                </button>
+                                                <button type="reset"
+                                                        class="btn btn-secondary waves-effect m-l-5">
+                                                    Cancel
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div> <!-- end card-box -->
+
+                            </div> <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                     
+                        <!-- end row -->
+                        
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+   
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+
+        </div>
+        <!-- END wrapper -->
+
+        <!-- Right Sidebar -->
+        <%- include('../../../layouts/rightsidebar') %> 
+        <!-- /Right-bar -->
+
+        <%- include('../../../layouts/script') %>     
+
+        
+    </body>
+
+</html>

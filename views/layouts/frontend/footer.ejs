@@ -1,0 +1,88 @@
+<section class="section-padding footer" style="padding: 70px 0px">
+    <div class="container">
+       <div class="row">
+          <div class="col-lg-3 col-md-3">
+             <h4 class="mb-5 mt-0" style="margin-bottom: 2rem !important;"><a class="logo" href="index.html">
+                <div>
+                    <img src="../frontend_images/logo1.jpg" alt="gharjaggasansar logo"  height="120px" style="background-color: white;padding: 12px 22px;">
+                </div>
+             
+           </a></h4>
+           <!--   <p>, Lalitpur<br>Waedll Steet, Australia PA 6550</p> -->
+           <div class="footer-contact">
+              <p class="mb-0"><a class="" style="color: white;"><i class="icon-location"></i> <%= setting.location %></a></p>
+             <p class="mb-0"><a class=""  style="color: white;"><i class="icon-phone3"></i> <%= setting.contact %></a></p>
+             <p class="mb-0"><a class=""  style="color: white;"><i class="icon-line-mail"></i> <%= setting.email %></a></p>
+             <p class="mb-0"><a class=""  style="color: white;"><i class="icon-world"></i> www.kitabharu.com</a></p> 
+           </div>
+          
+
+
+          </div>
+          <div class="col-lg-2 col-md-2">
+             <h6 class="mb-4">OUR PROPERTIES</h6>
+             <ul>
+             <li><a href="/books"><i class="icon-arrow-right1"></i> Popular Listing</a></li>
+             <li><a href="/books"><i class="icon-arrow-right1"></i> Basic Listing</a></li>
+         
+             </ul>
+          </div>
+          <div class="col-lg-2 col-md-2">
+             <h6 class="mb-4">QUICK LINKS</h6>
+             <ul>
+             <li><a href="/ebooks"><i class="icon-arrow-right1"></i> E-books</a></li>
+             <li><a href="/stationary"><i class="icon-arrow-right1"></i> Stationary </a></li>
+             <li><a href="/articles"><i class="icon-arrow-right1"></i> Articles </a></li>
+             <!-- <li><a href="/publications"><i class="icon-arrow-right1"></i> Publication </a></li>
+             <li><a href="contactus"><i class="icon-arrow-right1"></i> Contact Us</a></li> -->
+          <!--    <li><a href="#"><i class="mdi mdi-arrow-right"></i> Land / Plots</a></li>
+             <li><a href="#"><i class="mdi mdi-arrow-right"></i> Restaurent</a></li> -->
+             </ul>
+          </div>
+          <div class="col-lg-2 col-md-2">
+             <h6 class="mb-4">Follow Us On</h6>
+             <ul>
+                <% if(setting.facebook_link != null && setting.facebook_link != ''){ %>
+                    <li><a href="<%= setting.facebook_link %>"><i class="icon-facebook-f"></i> Facebook</a></li>  
+                <% } %>
+                <% if(setting.twitter_link != null && setting.twitter_link != '' ){ %>
+                    <li><a href="<%= setting.twitter_link %>"><i class="icon-twitter2"></i> Twitter</a></li>  
+                <% } %>
+                <% if(setting.instagram_link != null && setting.instagram_link != ''){ %>
+                    <li><a href="<%= setting.instagram_link %>"><i class="icon-instagram"></i> Instagram</a></li>  
+                <% } %>
+                <% if(setting.linkedIn_link != null && setting.linkedIn_link != ''){ %>
+                    <li><a href="<%= setting.linkedIn_link %>"><i class="icon-linkedin2"></i> LinkedIn</a></li>  
+                <% } %>
+                <% if(setting.youtube_link != null && setting.youtube_link != ''){ %>
+                    <li><a href="<%= setting.youtube_link %>"><i class="icon-youtube"></i> Youtube</a></li>  
+                <% } %>
+      
+             </ul>
+          </div>
+          <div class="col-lg-3 col-md-3">
+           <!-- <div class="footer-newsletter">
+             <h6 class="mb-4">NEWSLETTER</h6>
+             <form action="/newsletter" method="POST">
+             <div class="input-group">
+                <input type="text" class="form-control" name="email" placeholder="Email Address">
+                <div class="input-group-append">
+                   <button class="btn btn-secondary" type="submit" style="background-color: #f3cd11;border-color: #f3cd11;"><i class="icon-email2" ></i></button>
+                </div>
+             </div>
+            </form>
+             <p class="text-info newsletter-info">Get the most recent updates from our site and be updated your self...</p>
+
+             </div> -->
+             <div class="footer-payment-icon">
+                <h6 class="mb-4">We Accept</h6>
+                <img src="../../frontend_images/footer/esewa.jpg" alt="" width="110px" height="80px">
+                  <!-- <img src="../../frontend_images/footer/cod.jpg" alt="" width="80px" height="50px"> -->
+                   <!-- <img src="../../frontend_images/footer/visa.png" alt="" width="80px" height="50px"> -->
+                    <img src="../../frontend_images/footer/khalti.png" alt="" width="110px" height="80px">
+                    <!-- <img src="../../frontend_images/footer/phonepay.jpg" alt="" width="80px" height="50px"> -->
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>

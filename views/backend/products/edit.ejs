@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Mirrored from coderthemes.com/ubold/layouts/default/forms-validation.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jul 2020 07:32:08 GMT -->
+<head>
+        <meta charset="utf-8" />
+        <title>Products | Smart Innovation</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="../../../frontend_images/logo.jpg"/>
+        <meta content="Kitabharu Admin Panel" name="description" />
+        <meta content="Coderthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <%- include('../../layouts/cssfile') %>
+
+    </head>
+
+    <body class="loading">
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Topbar Start -->
+            <%- include('../../layouts/navbar') %>
+            <!-- end Topbar -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+            <%- include('../../layouts/leftsidebar') %>
+            <!-- Left Sidebar End -->
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Dashbard</a></li>
+                                            <li class="breadcrumb-item ">Manage Admin</li>
+                                            <li class="breadcrumb-item ">Admin</li>
+                                            <li class="breadcrumb-item active"><%= title%></li>
+                                        </ol>
+                                    </div>
+                                    <h4 class="page-title"><%= title%></h4>
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title --> 
+
+                        <form role="form" action="/product/update" method="POST" class="parsley-examples" id="parsley-examples" enctype="multipart/form-data" onsubmit="Validation()"> 
+                            <input type="hidden" value="<%= products._id %>" name ="id">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="card-box">
+                                    <h4 class="header-title m-t-0 m-b-20">Product Category & Sub-Category</h4>
+                                    <hr>
+                                     <br>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-3 col-form-label">Category<span class="text-danger">*</span></label>
+                                            <div class="col-7">
+                                                <select id="product_category" name="product_category" class="selectpicker show-tick" data-style="btn-light" style="border: 1px solid lightgrey;" onchange="editchangeCategory()" required="">
+                                                    <option value="">Please select category </option>
+                                                    <% if(categories.length > 0){ %>
+                                                        <% categories.forEach(function(data){ %>
+                                                            <option value="<%= data._id %>" category="<%= data.category_name %>" <% if(data.category_name == products.category_id.category_name ){ %> <%= selected %>  <% } %> ><%= data.category_name %></option>
+                                                    <%  })
+                                                    } %>
+                                                </select>
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                    Select product category</span>
+                                            </div>
+                                        </div>
+                                  
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-3 col-form-label">Sub-Category<span class="text-danger">*</span></label>
+                                            <div class="col-7">
+                                                <select id="subCategoryType"  name="product_subcategory" class="selectpicker show-tick subCategoryType" data-style="btn-light" style="border: 1px solid lightgrey;" onchange="changeSubCategory()" required>
+                                                            <option value="">Please select subcategory </option>
+                                                            <% if(selectedSubcategory.length > 0){ %>
+                                                                <% selectedSubcategory.forEach(function(data){ %>
+                                                                    <option value="<%= data._id %>"  <% if(data.subcategory_name == products.subcategory_id.subcategory_name ){ %> <%= selected %>  <% } %> ><%= data.subcategory_name %></option>
+                                                            <%  })
+                                                            } %>
+                                                </select>
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                    Select product sub-category</span>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="card-box">
+                                    <h4 class="header-title m-t-0 m-b-20">Product Details</h4>
+                                    <hr>
+                                    
+                                    <div id="book_type" book_type = "<%= products.book_type%>" style="display: none;">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-3 col-form-label">Book Type<span class="text-danger">*</span></label>
+                                            <div class="col-7">
+                                                <div class="checkbox checkbox-success form-check-inline" style="margin-right: 2rem;padding-top: 5.5px;">
+                                             
+                                                    <input class="" type="checkbox" id="booktypeCheckbox1" value="paperbook" name="paperbook" onchange="changePaperbook()" >
+                                                    <label for="booktypeCheckbox1"> Paper Book</label>
+                                                </div>
+                                                <div class="checkbox checkbox-success form-check-inline" style="padding-top: 5.5px;">
+                                                    <input type="checkbox" id="booktypeCheckbox2" value="ebook" name="ebook" onchange="editchangeEbook()" > 
+                                                    <label for="inlineCheckbox2"> E-Book </label>
+                                                </div><br>
+                                                <span id="booktypeErr" class="help-block" style="font-weight: normal;color: #f1556c;font-size: 14px;margin-bottom: 0;top: 6px;left: -5px; position: relative;">
+                                                 </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="mag_book_type" book_type = "<%= products.book_type%>" style="display: none;">
+                                        <div class="form-group row"><label for="inputEmail3" class="col-3 col-form-label">Book Type<span class="text-danger">*</span></label><div class="col-7"><div class="checkbox checkbox-success form-check-inline" style="padding-top: 5.5px;"><input type="checkbox" id="magbooktypeCheckbox2" value="ebook" name="mag_ebook" onchange="changeEbook()"  disabled checked><label for="inlineCheckbox2"> E-Book </label><div style="padding-left:15px;" id="booktypeErr"></div></div><br><span id="booktype-error" class="help-block" style="font-weight: normal;color: #f1556c;font-size: 14px;margin-bottom: 0;top: 6px;left: -5px; position: relative;"></span></div></div>
+                                    </div>
+
+                                   
+                                       
+                                            <% if(products.book_type == 'ebook' || products.book_type == 'both'){%>
+                                                <div id="e-book">
+                                                <input type="hidden" id="example-fileinput" class="form-control-file" name="ebook_id" value="<%= products.ebook_id._id %>">
+                                            <div style="padding: 25px 0; border: 2px solid lightgrey;margin-bottom: 2.5rem;border-radius: 5px;" >
+                                                <div class="form-group row">
+                                                    <label for="hori-pass3" class="col-3 col-form-label">E-Book PDF<span class="text-danger" style="font-size:16px">*</span></label>
+                                                    <div class="col-7">
+                                                        <iframe src="../../../images/backend/products/ebook/<%= products.ebook_id.ebook_file %>" width="100%" height="400px" style="margin-bottom: 25px;"></iframe>
+                                                        <input type="hidden" name="previousPdfFile" value="<%= products.ebook_id.ebook_file %>" > 
+                                                        <span id="pdfError"></span>
+                                                        <input type="file" id="pdfFile" class="form-control-file" name="ebook_file" onchange="pdfValidation()">
+                                                        <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Upload PDF File</span>
+                                                    </div>
+                                                </div> 
+                                                <div class="form-group row" style="margin-bottom: 0px;">
+                                                    <label for="inputEmail3" class="col-3 col-form-label">E-Book Price<span class="text-danger">*</span></label>
+                                                    <div class="col-7">
+                                                        <input type="text" required parsley-type="text" class="form-control" id="inputEmail4" placeholder="Enter a E-book price" value="<%= products.ebook_id.ebook_price %>" name="ebook_price" required>
+                                                        <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please enter a e-book price. </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% }else{ %>
+                                            <div id="e-book" style="display: none;">
+                                            <div style="padding: 25px 0; border: 2px solid lightgrey;margin-bottom: 2.5rem;border-radius: 5px;" >
+                                                <div class="form-group row">
+                                                    <label for="hori-pass3" class="col-3 col-form-label">E-Book PDF <span class="text-danger" style="font-size:16px">*</span></label>
+                                                    <div class="col-7">
+                                                        <span id="pdfError"></span>
+                                                        <input type="file" id="pdfFile" class="form-control-file" name="ebook_file" onchange="pdfValidation()">
+                                                        <input type="hidden" name="previousPdfFile" value="" > 
+                                                        <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Upload PDF File</span>
+                                                    </div>
+                                                </div> 
+                                                <div class="form-group row" style="margin-bottom: 0px;">
+                                                    <label for="inputEmail3" class="col-3 col-form-label">E-Book Price<span class="text-danger">*</span></label>
+                                                    <div class="col-7">
+                                                        <input type="text"  parsley-type="text" class="form-control"id="edit_ebook_price" placeholder="Enter a E-book price" value="" name="ebook_price" required>
+                                                        <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please enter a e-book price. </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        <% } %>
+
+                                    <!-- For Magazine -->
+                                    <% if(products.category_id._id == '6051a40a97a69e41b4b046f7'){ %>
+                                    <div id="magazine-volumes" class="mb-4">
+                                   
+                                    
+                                            <% if(productMagazine.length > 0){ %>
+                                                <h4 style="color: #6b5ddeeb;font-weight: bold;">Add volumes of magazine</h4>
+                                            
+                                                <% productMagazine.forEach(function(data){ %>
+                                                    <div class="len" style="padding: 25px 0; border: 2px solid lightgrey;margin-bottom: 1rem;border-radius: 5px;position:relative;">
+                                                        <i class="mdi mdi-close closeMagVol" onclick="removeMagazineVol()"></i>
+                                                        <div class="d-flex">
+                                                            <div class="col-md-4 mx-auto ">
+                                                                <label class="font-weight-bold">Volume Part</label>
+                                                                <input type="text" required parsley-type="text" class="form-control" id="inputEmail1" placeholder="Enter a volume number" value="<%= data.volume_part %>" name="magazine_volume">
+                                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please enter a magazine volume number. </span></div>
+                                                                <div class="col-md-5 m-auto">
+                                                                    <label class="font-weight-bold">E-Book PDF</label>
+                                                                    <div class="">
+                                                                        <span id="pdfError" class="pdfError"></span>
+                                                                        <iframe src="../../../images/backend/products/ebook/magazine/<%= data.magazine_ebook_file %>" width="100%" height="250px" style="margin-bottom: 25px;"></iframe>
+                                                                        <input type="hidden" class="previousMagPdfFile" name="previousMagPdfFile" value="<%= data.magazine_ebook_file %>">
+                                                                        <input type="file" id="pdfFile" class="form-control-file mag_ebook_file" name="mag_ebook_file1" onchange="pdfValidation()">
+                                                                        <input type="hidden" value="<%= data._id %>" name="mag_id" />
+                                                                        <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Upload PDF File</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                <% }) %>  
+                                           <% } %>
+                                        
+                                            <div class="text-center" id="magazineAddBtn"><button type="button" class="btn btn-success btn-rounded waves-effect waves-light pl-4 pr-4" onclick="addMagazineVol()">Add</button>&nbsp;&nbsp;</div>
+                                </div>  
+                                <% }else{ %>
+                                    <div id="magazine-volumes" class="mb-4" style="display: none;">
+                                            <h4 style="color: #6b5ddeeb;font-weight: bold;">Add volumes of magazine</h4>
+                                                <div class="len" style="padding: 25px 0; border: 2px solid lightgrey;margin-bottom: 1rem;border-radius: 5px;position:relative;">
+                                                    <i class="mdi mdi-close closeMagVol" onclick="removeMagazineVol()"></i>
+                                                    <div class="d-flex">
+                                                        <div class="col-md-4 mx-auto ">
+                                                            <label class="font-weight-bold">Volume Part</label>
+                                                            <input type="text" required parsley-type="text" class="form-control volume_part" placeholder="Enter a volume number" value="" name="magazine_volume">
+                                                            <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please enter a magazine volume number. </span></div>
+                                                            <div class="col-md-5 m-auto">
+                                                                <label class="font-weight-bold">E-Book PDF</label>
+                                                                <div class="">
+                                                                    <span id="pdfError" class="pdfError"></span>
+                                                                 
+                                                                    <input type="hidden" class="previousMagPdfFile" name="previousMagPdfFile" value="">
+                                                                    <input type="file" id="pdfFile" class="form-control-file" name="mag_ebook_file1" onchange="pdfValidation()">
+                                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Upload PDF File</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                   
+                                    
+                                        <div class="text-center" id="magazineAddBtn"><button type="button" class="btn btn-success btn-rounded waves-effect waves-light pl-4 pr-4" onclick="addMagazineVol()">Add</button>&nbsp;&nbsp;</div>
+                            </div>
+
+                                <% } %>
+
+
+
+
+
+
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-3 col-form-label">Product Name<span class="text-danger">*</span></label>
+                                        <div class="col-7">
+                                            <input type="text" required parsley-type="text" class="form-control"
+                                                id="" placeholder="Enter a product name" value="<%=  products.product_name %>" name="product_name" required>
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                    Please enter a product name. </span>
+                                        </div>
+                                    </div>
+                                      <div class="form-group row">
+                                        <label for="inputEmail2" class="col-3 col-form-label">Price<span class="text-danger">*</span></label>
+                                        <div class="col-7">
+                                            <input type="text" required parsley-type="text" class="form-control"
+                                            id="productPrice" placeholder="Enter a product price" value="<%=  products.product_price %>" name="product_price" required onkeyup="discountPercentByPrice()">
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                    Please enter a product price. </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-3 col-form-label">Discount( in %)</label>
+                                        <div class="col-4">
+                                                <% 
+                                                var discountPrice = 0
+                                                discountPrice = products.discount_percent/100 *  products.product_price %>
+                                                %>
+
+                                            <input type="number"  parsley-type="text" class="form-control"
+                                                id="discountPercent" placeholder="Enter a discount %" value="<%=  products.discount_percent %>" name="discount_percent"  onkeyup="discountPercentByPercent()">
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                    Please enter a product price. </span>
+                                        </div>
+                                        <div class="col-4">
+                                            <input type="text"  parsley-type="text" class="form-control"
+                                                id="discountedPrice" placeholder="Discount in price" value="<%= discountPrice %>" name="discount_price" disabled>
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                    Discount Price. </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-3 col-form-label">Quantity (Stock)<span class="text-danger">*</span></label>
+                                        <div class="col-7">
+                                            <input type="text" required parsley-type="text" class="form-control"
+                                                id="inputEmail3" placeholder="Enter a stock number" value="<%=  products.product_stock %>" name="stock_number" required>
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                    Please enter a number of stock. </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="hori-pass3" class="col-3 col-form-label">Product Image
+                                            </label>
+                                        <div class="col-7">
+                                      
+                                            <% if(products.product_image != null && products.product_image != ''){%>
+                                                <img src="../../../images/backend/products/<%= products.product_image %>" width="40%" style="margin-bottom: 15px;"  >
+                                                <br>
+                                                <p><%= products.product_image %></p>
+                                                <% }else{%>
+                                                    <h5>No Image Choosen</h5>
+                                                <% } %>
+                                            
+                                                <span id="imgError"></span>
+                                            <input type="hidden" name="previousproductImage" value="<%= products.product_image %>" >        
+                                            <input type="file" id="example-fileinput1" class="form-control-file" name="product_image" onchange="imageValidation()">
+                                            <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                Upload product Image</span>
+                                        </div>
+                                    </div>            
+                                    <div class="form-group row">
+                                        <label for="hori-pass3" class="col-3 col-form-label"> Description
+                                            </label>
+                                        <div class="col-8">
+                                            <textarea name="product_description" id="producteditor"  class="form-control" placeholder="Enter content here." ><%=  products.product_description %></textarea>
+                                            <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                If u have any information about product. Please provide us above.</span>
+                                        </div>
+                                    </div>
+                                  
+                               
+                                    <!-- <div class="form-group row">
+                                        <label for="inputEmail56" class="col-3 col-form-label">Product Price<span class="text-danger">*</span></label>
+                                        <div class="col-7">
+                                            <input type="text" required parsley-type="text" class="form-control"
+                                                id="inputEmail56" placeholder="Enter an product price" value="<%= products.product_price %>" name="product_price" autocomplete="off" min="0" required>
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                    Please enter product price. </span>
+                                        </div>
+                                 
+                                    </div> -->
+                                    <!-- <div class="form-group row">
+                                        <label for="inputEmail3" class="col-3 col-form-label">Product Weight<span class="text-danger">*</span></label>
+                                        <div class="col-4">
+                                            <input type="text"  parsley-type="number" class="form-control"
+                                                id="inputEmail3" placeholder="Enter an product weight" value="<%= products.product_weight %>" name="product_weight" autocomplete="off" min="0" >
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                    Please enter product weight. You can leave blank if you dont have information. </span>
+                                        </div>
+                                        <div class="col-3">
+                                            <select name="weight_unit" class="selectpicker show-tick" data-style="btn-light" style="border: 1px solid lightgrey;">
+                                                <option value="">Select Unit</option>
+                                                <option value="Gram" <% if(products.product_weight_unit == 'Gram'){ %> <%= selected %> <% }%> >Gram(g)</option>
+                                                <option value="Kilogram"  <% if(products.product_weight_unit == 'Kilogram'){ %> <%= selected %> <% }%> >Kilogram(kg)</option>
+                                                <option value="Squaremeter" <% if(products.product_weight_unit == 'Squaremeter'){ %> <%= selected %> <% }%> >Square Meter(Sq.m)</option>
+                                    </select>
+                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                        Please select weight unit. </span>
+                                        </div>
+                                    </div> -->
+                                    <div class="form-group row" style="margin-top: 30px;">
+                                        <div class="col-8 offset-3">
+                                            
+                                            <button type="submit"  dir="ltr" data-style="slide-up" class="btn btn-blue waves-effect waves-light ladda-button">
+                                                Submit
+                                            </button>
+                                            <button type="reset"
+                                                    class="btn btn-secondary waves-effect m-l-5">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="card-box" style="display: none;">
+                                    <h4 class="header-title m-t-0 m-b-20">Flash Sale</h4>
+                                    <hr>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-3 col-form-label">Flash Sale</label>
+                                        <div class="col-7">
+                                            <select name="flash_sale" class="selectpicker show-tick" data-style="btn-light" style="border: 1px solid lightgrey;" <% if(products.flash_sale != null){ %> onchange="editflashsale()" <% }else{ %>onchange="flashsale()" <% } %> >
+                                    
+                                                        <option value="" >No</option>
+                                                        <option value="yes" <% if(products.flash_sale != null){%> <%= selected %> <% } %>>Yes</option>
+    
+                                    </select>
+                                    <!-- <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                        Choose product brand. You can also leave blank if you dont't have any brand. </span> -->
+                                        </div>
+                                    </div>
+                                   
+
+                                    <div <% if(products.flash_sale != null){ %> id="appendeditFlashsale" <% }else{ %> id="appendFlashsale" <% } %> >
+                                        <% if(products.flash_sale != null){ %>
+                                            <input type="hidden" name="flash_sale_id" value="<%= products.flash_sale._id %>" >
+                                            <div class="form-group row">
+                                              
+                                                <label for="inputEmail3" class="col-3 col-form-label">Flash Sale Price</label>
+                                                <div class="col-7">
+                                                    <input type="text" class="form-control" name="flashsaleprice" placeholder="Please choose flash sale discount price." value="<%= products.flash_sale.flashsale_product_price %>" required>
+                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please choose flash sale discount price. </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inputEmail56" class="col-3 col-form-label">Flash Sale Start Date<span class="text-danger">*</span></label>
+                                                
+                                                <span id="previous_flash_startdate" value="<%= products.flash_sale.flashsale_start_date %>"></span>
+                                                <div class="col-4"><input type="text" name="flash_startdate" id="flashsale-startdate" class="form-control" placeholder="Choose a start date" onchange="changeflashstartdate()" value="<%= products.flash_sale.flashsale_start_date %>" required>
+                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please choose start date of Flash Sale. </span>
+                                                </div>
+                                                <div class="col-3"><input type="text" name="flash_starttime"  parsley-type="text" class="form-control" id="editflashsale-starttime"  placeholder="Choose a start date" value="<%= products.flash_sale.flashsale_start_time %>" required>
+                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please choose end date of Flash Sale. </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inputEmail56" class="col-3 col-form-label">Flash Sale End Date<span class="text-danger">*</span></label>
+                                                <div class="col-4">
+                                                    <input type="text" required parsley-type="text" class="form-control" id="flashsale-enddate" placeholder="Choose a start date" value="<%= products.flash_sale.flashsale_end_date %>" name="flash_enddate">
+                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please choose end date of Flash Sale. </span>
+                                                </div>
+                                                <div class="col-3">
+                                                    <input type="text" required parsley-type="text" class="form-control" id="editflashsale-endtime" placeholder="Choose a end time" value="<%= products.flash_sale.flashsale_end_time %>" name="flash_endtime" >
+                                                    <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please choose end date of Flash Sale. </span>
+                                                </div></div><div class="form-group row"><label for="inputEmail3" class="col-3 col-form-label">Flash Sale Status</label>
+                                                    <div class="col-7">
+                                                        <select id="flashsalePicker" name="flashsale_status" class="selectpicker show-tick" data-style="btn-light" style="border: 1px solid lightgrey;">
+                                                            <option value="Active" <% if(products.flash_sale.status == 'Active'){%><%=selected %> <% } %> >Active</option>
+                                                            <option value="Inactive" <% if(products.flash_sale.status == 'Inactive'){%><%=selected %> <% } %> >Inactive</option>
+                                                        </select>
+                                                        <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please choose Active to show this product in flash sales. </span>
+                                                    </div>
+                                                </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                                      
+                                <div class="card-box" style="display: none;">
+                                    <h4 class="header-title m-t-0 m-b-20">Special Offer</h4>
+                                    <hr>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-3 col-form-label">Special Offer</label>
+                                        <div class="col-7">
+                                            <select name="specialoffer_sale" class="selectpicker show-tick" data-style="btn-light" style="border: 1px solid lightgrey;" <% if(products.special_offer != null){ %> onchange="editspecialoffer() <% }else{ %> onchange="specialoffer() <% } %>">
+                                                        <option value="">No</option>
+                                                        <option value="yes"  <% if(products.special_offer != null){%> <%= selected %> <% } %>>Yes</option>     
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                
+                                    
+                                    <div <% if(products.special_offer != null){ %> id="appendeditSpecialOffer" <% }else{ %> id="appendSpecialOffer" <% } %> >
+                                        <% if(products.special_offer != null){ %>
+                                            <input type="hidden" name="special_offer_id" value="<%= products.special_offer._id %>" >
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-3 col-form-label">Special Discount (%)</label>
+                                            <div class="col-7">
+                                                <input value="<%= products.special_offer.specialoffer_percent %>" type="text"  id="specialDiscountPercent" name="specialDiscountPercent" placeholder="Please enter discount in %" data-a-sign="%" data-p-sign="s" class="form-control autonumber">
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please choose offer price discount . </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-3 col-form-label">Start Date</label>
+                                            <div class="col-7">
+                                                <input type="text" value="<%= products.special_offer.specialoffer_start_date %>" name="specialoffer_startdate" id="specialoffer_startdate" class="form-control" placeholder="Choose a start date" required>
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please choose offer price discount . </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-3 col-form-label">Expire Date</label>
+                                            <div class="col-7">
+                                                <input type="text" value="<%= products.special_offer.specialoffer_end_date %>" name="specialoffer_enddate" id="specialoffer_enddate" class="form-control" placeholder="Choose a end date" required>
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please choose offer price discount . </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-3 col-form-label">Thumbnail Image</label>
+                                            <div class="col-7">
+                                                <% if(products.special_offer.specialoffer_image != null){%>
+                                                    <img src="../../../images/backend/products/special_offer/<%= products.special_offer.specialoffer_image %>" width="40%" style="margin-bottom: 15px;">
+                                                    <br>
+                                                    <p><%= products.special_offer.specialoffer_image %></p>
+                                                    <% }else{%>
+                                                        <h5>No Image Choosen</h5>
+                                                    <% } %>
+                                                    <input type="hidden" name="previousSpecialOfferImage" value="<%= products.special_offer.specialoffer_image %>" > 
+                                                <input type="file" id="example-fileinput2" class="form-control-file" name="specialoffer_image" >
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please choose offer price discount . </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-3 col-form-label">Special Offer Status</label>
+                                            <div class="col-7">
+                                                <select id="flashsalePicker1" name="specialoffer_status" class="selectpicker show-tick" data-style="btn-light" style="border: 1px solid lightgrey;">
+                                                    <option value="Active" <% if(products.special_offer.status == 'Active'){%><%=selected %> <% } %>>Active</option>
+                                                    <option value="Inactive" <% if(products.special_offer.status == 'Inactive'){%><%=selected %> <% } %>>Inactive</option>
+                                                </select>
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please choose Active to show this product in special offer. </span>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+
+                                <div class="card-box" style="display: none;">
+                                    <h4 class="header-title m-t-0 m-b-20">Bulk Discount</h4>
+                                    <hr>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-3 col-form-label">Bulk Discount</label>
+                                        <div class="col-7">
+                                            <select name="bulk_offer" class="selectpicker show-tick" data-style="btn-light" style="border: 1px solid lightgrey;" <% if(products.bulk_offer != null){ %> onchange="editbulkdiscount()" <% }else{ %>onchange="bulkdiscount()" <% } %> >
+                                                        <option value="">No</option>
+                                                        <option value="yes" <% if(products.bulk_offer != null){%> <%= selected %> <% } %>>Yes</option>     
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                
+                                    
+                                    <div <% if(products.bulk_offer != null){ %> id="appendeditBulkDiscount" <% }else{ %> id="appendBulkDiscount" <% } %> >
+                                        <% if(products.bulk_offer != null){ %>
+                                        <input type="hidden" name="bulk_offer_id" value="<%= products.bulk_offer._id %>" >
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-3 col-form-label">Minimum No. of Product</label>
+                                            <div class="col-7">
+                                                <input type="text" value="<%= products.bulk_offer.minimum_product %>" name="bulk_minimum_product" id="minimum_product" class="form-control" placeholder="Enter minimum number of product" required>
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please choose offer price discount . </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-3 col-form-label">Special Discount (%)</label>
+                                            <div class="col-7">
+                                                <input type="text" value="<%= products.bulk_offer.bulkDiscountPercent %>" id="bulkDiscountPercent" name="bulkDiscountPercent" placeholder="Please enter discount in %" data-a-sign="%" data-p-sign="s" class="form-control autonumber">
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please choose offer price discount .</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-3 col-form-label">Bulk Offer Status</label>
+                                            <div class="col-7">
+                                                <select id="flashsalePicker2" name="bulkoffer_status" class="selectpicker show-tick" data-style="btn-light" style="border: 1px solid lightgrey;">
+                                                    <option value="Active" <% if(products.bulk_offer.status == 'Active'){%> <%=selected %> <% } %> >Active</option>
+                                                    <option value="Inactive" <% if(products.bulk_offer.status == 'Inactive'){%> <%=selected %> <% } %> >Inactive</option>
+                                                </select>
+                                                <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please choose Active to show this product in bulk offer. </span>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                    </div>
+                                
+                                </div>
+                          
+
+
+                                
+                            </div> <!-- end col -->
+                            <div class="col-lg-4">
+                                <div class="card-box">
+                                    <h4 class="header-title m-t-0 m-b-20">Status Info</h4>
+                                    <hr>
+                                    <br> 
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-4 col-form-label">Status<span class="text-danger">*</span></label>
+                                        <div class="col-7">
+                                            <select name="status" class="selectpicker show-tick" data-style="btn-light" style="border: 1px solid lightgrey;">
+                                                <option value="Active" <% if(products.status == 'Active'){ %> <%=selected%> <% } %> >Active</option>
+                                                <option value="Inactive"  <% if(products.status == 'Inactive'){ %> <%=selected%> <% } %> >Inactive</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                        <!-- end row -->
+
+                     
+                        <!-- end row -->
+                        
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+
+        </div>
+        <!-- END wrapper -->
+
+        <!-- Right Sidebar -->
+        <%- include('../../layouts/rightsidebar') %> 
+        <!-- /Right-bar -->
+
+        <%- include('../../layouts/script') %>     
+
+        
+    </body>
+
+</html>

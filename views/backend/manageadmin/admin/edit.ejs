@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Mirrored from coderthemes.com/ubold/layouts/default/forms-validation.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jul 2020 07:32:08 GMT -->
+<head>
+        <meta charset="utf-8" />
+        <title>Admin | Smart Innovation</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="../../../frontend_images/logo.jpg"/>
+        <meta content="Kitabharu Admin Panel" name="description" />
+        <meta content="Coderthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <%- include('../../../layouts/cssfile') %>
+
+    </head>
+
+    <body class="loading">
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Topbar Start -->
+            <%- include('../../../layouts/navbar') %>
+            <!-- end Topbar -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+            <%- include('../../../layouts/leftsidebar') %>
+            <!-- Left Sidebar End -->
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Dashbard</a></li>
+                                            <li class="breadcrumb-item ">Manage Admin</li>
+                                            <li class="breadcrumb-item ">Admin</li>
+                                            <li class="breadcrumb-item active"><%= title%></li>
+                                        </ol>
+                                    </div>
+                                    <h4 class="page-title"><%= title%></h4>
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title --> 
+
+                        <form role="form" enctype="multipart/form-data" action="/admin/update" method="POST" class="parsley-examples" id="parsley-examples"  onsubmit="manageadminFormValidation()"> 
+                            <input type="hidden" name="id" value="<%= admin._id%>">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="card-box">
+                                    <h4 class="header-title m-t-0 m-b-20">Admin Type</h4>
+                                    <hr>
+                                     <br>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-4 col-form-label">Admin Type<span class="text-danger">*</span></label>
+                                            <div class="col-7">
+                                                <select name="admintype" class="selectpicker show-tick" data-style="btn-light" style="border: 1px solid lightgrey;" onchange="changeAdminType()"> 
+                                                    <%  if(admintype.length > 0){ %>
+                                                         <% admintype.forEach(function(data){ %>
+                                                            <option value="<%= data._id %>" adminType="<%= data.admin_type %>" <% if(admin.admin_type.admin_type ==  data.admin_type ){ %> <%= selected%> <% } %>  ><%= data.admin_type %></option>
+                                                       <% }) %>
+                                                    <%}%>   
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <% if(admin.publication != null){ %>
+                                        <div id="publicationName"   style="display: block;">
+                                            <div class="form-group row">
+                                                <label for="inputEmail3" class="col-4 col-form-label">Publication Type<span class="text-danger">*</span></label>
+                                                <div class="col-7">
+                                                    <select id="flashsalePicker2" name="publicationName" class="selectpicker show-tick" data-style="btn-light" style="border: 1px solid lightgrey;" required>
+                                                        <option value=""> Choose your publication</option>
+                                                        <% if(publication.length > 0){ %>
+                                                            <% publication.forEach(function(data){ %>
+                                                         
+                                                              
+                                                                <option asd="  <%= admin.publication %>" value="<%= data.publication_name %>" <% if(admin.publication ==  data.publication_name ) { %> <%= selected %> <% } %>   > <%= data.publication_name %>  </option>
+                                                           <% }) %>
+                                                       
+                                                        <% } %>
+     
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% }else{ %>
+                                            <div id="publicationName"   style="display: none;">
+                                                <div class="form-group row">
+                                                    <label for="inputEmail3" class="col-4 col-form-label">Publication Type<span class="text-danger">*</span></label>
+                                                    <div class="col-7">
+                                                        <select id="flashsalePicker2" name="publicationName" class="selectpicker show-tick" data-style="btn-light" style="border: 1px solid lightgrey;" required>
+                                                            <option value=""> Choose your publication</option>
+                                                            <% if(publication.length > 0){ %>
+                                                                <% publication.forEach(function(data){ %>
+                                                             
+                                                                  
+                                                                    <option asd="  <%= admin.publication %>" value="<%= data.publication_name %>" <% if(admin.publication ==  data.publication_name ) { %> <%= selected %> <% } %>   > <%= data.publication_name %>  </option>
+                                                               <% }) %>
+                                                           
+                                                            <% } %>
+         
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <% } %>
+
+
+                                </div> <!-- end card-box -->
+                                <div class="card-box">
+                                    <h4 class="header-title m-t-0 m-b-20">Personal Info</h4>
+                                    <hr>
+                                    <br>
+
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-4 col-form-label">First Name<span class="text-danger">*</span></label>
+                                        <div class="col-7">
+                                            <input type="text" required parsley-type="text" class="form-control"
+                                                id="inputEmail2" placeholder="Enter an first name" value="<%= admin.firstname %>" name="firstname">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-4 col-form-label">Last Name<span class="text-danger">*</span></label>
+                                        <div class="col-7">
+                                            <input type="text" required parsley-type="text" class="form-control"
+                                                id="inputEmail2" placeholder="Enter an last name" value="<%= admin.lastname %>" name="lastname">
+                                        </div>
+                                    </div>
+                                  
+                                    <div class="form-group row">
+                                        <label for="hori-pass2" class="col-4 col-form-label">Address<span class="text-danger">*</span></label>
+                                        <div class="col-7">
+                                            <input  id="hori-pass2" type="text" placeholder="Enter an address" 
+                                                class="form-control" name="address" value="<%= admin.address %>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="hori-pass2" class="col-4 col-form-label">Telephone or Mobile No.</label>
+                                        <div class="col-7">
+                                            <input  id="hori-pass2" type="text" placeholder="Enter a telehone or mobile number" 
+                                                class="form-control" name="phonenumber" value="<%= admin.phonenumber %>">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="hori-pass3" class="col-4 col-form-label">Profile Pic
+                                            </label>
+                                        <div class="col-7">
+                                            <% 
+                                       
+                                            if(admin.image != '' && admin.image != null){%>
+                                            <img src="../../../images/backend/admins/<%= admin.image %>" width="40%" style="margin-bottom: 15px;">
+                                            <br>
+                                            <p><%= admin.image %></p>
+                                          
+                                            <% } %>
+                                            <input type="hidden" name="previousprofilePic" value="<%= admin.image %>" > 
+                                            <span id="imgError"></span>
+                                            <input type="file" id="example-fileinput" class="form-control-file" name="profilePic" onchange="manageadminImageValidation()">
+                                            <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                                Upload brand logo. you can also leave blank if u dont have any.</span>
+                                            <span style="font-weight: normal;font-size: 11px;margin-bottom: 0;" >Recommended Size: 500 * 500</span>
+                                        </div>
+                                    </div>
+                    
+                                </div> <!-- end card-box -->
+                        
+                        
+                                <div class="card-box">
+                                    <h4 class="header-title m-t-0 m-b-20">Login Info</h4>
+                                    <hr>
+                                    <br>   
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-4 col-form-label">Email Address<span class="text-danger">*</span></label>
+                                        <div class="col-7">
+                                            <input type="email" required parsley-type="email" class="form-control"
+                                                id="inputEmail2" placeholder="Enter an first name" value="<%= admin.email%>" name="email" required>
+                                        </div>
+                                    </div>
+                        
+                                    <div class="form-group row">
+                                        <label for="newpassword" class="col-4 col-form-label">New Password</label>
+                                        <div class="col-7">
+                                            <p style="margin-bottom: 1px;font-size: 12px;color: #a267ff;">Please aleast include one character.</p>
+                                            <input  id="newpassword" type="password" placeholder="Enter a new password" 
+                                                class="form-control" name="newpassword" value="" >
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="conpassword" data-parsley-equalto="#hori-pass2" class="col-4 col-form-label">Confirm Password
+                                            </label>
+                                        <div class="col-7">
+                                            <input data-parsley-equalto="#newpassword" type="password" 
+                                                placeholder="Re-enter a password" class="form-control" id="conpassword" name="confirmpassword" >
+                                        </div>
+                                    </div>
+                                    <span id="err" style="color: crimson;"></span>
+                                                                     <br>
+                                    <div class="form-group row">
+                                        <div class="col-8 offset-4">
+                                            
+                                            <button type="submit" id="addAdminBtn" dir="ltr" data-style="slide-up" class="btn btn-blue waves-effect waves-light ladda-button">
+                                                Submit
+                                            </button>
+                                            <button type="reset"
+                                                    class="btn btn-secondary waves-effect m-l-5">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div> <!-- end card-box -->
+                                 
+                            </div> <!-- end col -->
+                            <div class="col-lg-4">
+                                <div class="card-box">
+                                    <h4 class="header-title m-t-0 m-b-20">Status Info</h4>
+                                    <hr>
+                                    <br> 
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-4 col-form-label">Status<span class="text-danger">*</span></label>
+                                        <div class="col-7">
+                                            <select name="status" class="selectpicker show-tick" data-style="btn-light" style="border: 1px solid lightgrey;">
+                                                <option value="Active" <% if(admin.status == 'Active'){ %> <%=selected%> <% } %> >Active</option>
+                                                <option value="Inactive"  <% if(admin.status == 'Inactive'){ %> <%=selected%> <% } %> >Inactive</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            </form>
+                        </div>
+                        <!-- end row -->
+
+                     
+                        <!-- end row -->
+                        
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+
+        </div>
+        <!-- END wrapper -->
+
+        <!-- Right Sidebar -->
+        <%- include('../../../layouts/rightsidebar') %> 
+        <!-- /Right-bar -->
+
+        <%- include('../../../layouts/script') %>     
+
+        
+    </body>
+
+</html>

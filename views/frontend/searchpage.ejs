@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+    <%- include('../layouts/frontend/head') %>
+    <body class="stretched">
+        <div id="wrapper" class="clearfix">
+            <%- include('../layouts/frontend/top-header') %>
+            <header id="header" class="sticky-style-2">
+                <%- include('../layouts/frontend/mid-header') %>
+                <%- include('../layouts/frontend/menu') %>
+            </header>
+
+<div class="banner">
+   <div class="overlay"></div>
+  <div class="inner-banner container">
+     
+      <div class="inner-banner-title">
+           <h4>Our Books</h4>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">Home</a></li>
+            <li class="breadcrumb-item active"><a href="">Books</a></li>
+
+          </ol>
+      </div>
+     
+  </div>
+</div>
+
+<div class="listing container mt-4 mb-4">
+     <ol class="breadcrumb" >
+          
+             <li class="breadcrumb-item active"><a style="font-size: 25px;">Search Results for '<%= searchValue %>'</a></li>
+          </ol>
+</div>
+
+<div class="container" style="margin-bottom: 35px;">
+  <div class="row">
+   
+    <div class="col-md-12">
+      <div class="col-md-12 text-center mt-5 load" style="display: none;">
+        <img src="../../images/loading.gif" >
+      </div>
+      <div class="row book-listing-page">
+       
+
+        <% if(searchedProducts.length > 0){ %>
+            <% searchedProducts.forEach(function(data){ %>
+              <div class="col-md-3">
+                <div class="new-arrival-books">
+            <img src="../images/backend/products/<%= data.product_image %>" alt="" style="width: 100%;height: 235px;">
+             <div class="new-arrival-books-desc">
+             
+              <h4><%= data.product_name %></h4>
+              <span style="font-size: 14px;color: #8b8b8b">
+              <% if(data.book_attribute.length > 0){ %>
+                <%= data.book_attribute[0].author_name %>
+              <% } %>
+              </span>
+              <div class="price-box">
+                   <h4>Rs. <%= data.product_price %></h4>
+              </div>
+            </div>
+                 <div class="view-book">
+             <a href="../bookdetails/<%= data.slug%>" ><button type="" class="form-control"><i class="icon-line-eye"></i>&nbsp;&nbsp;View Details</button></a>
+
+            </div>
+          </div>
+          </div>
+           <% }) %>
+          <% }else{ %>
+           
+              <h4 style="margin: auto;">Sorry, No Results</h4>
+            
+            <% } %>
+ 
+      </div>
+ 
+    </div>
+  </div>
+</div>
+
+<%- include('../layouts/frontend/footer') %>
+      <!-- End Footer -->
+      <!-- Copyright -->
+      <div class=" text-center footer-bottom" >
+         <p class="mt-0 mb-0">&copy; Copyright 2020 <strong style="color: #d14031">Smart Innovation</strong>. All Rights Reserved</p>
+     <!--     <small class="mt-0 mb-0">
+         Made with <i class="mdi mdi-heart text-danger"></i> by <a target="_blank" href="https://giftechies.com/" class="text-warning">Giftechies</a>
+         </small> -->
+      </div>
+
+
+
+</div>
+
+<%- include('../layouts/frontend/script') %>
+</body>
+
+
+
+
+<!-- Mirrored from themes.semicolonweb.com/html/canvas/menu-7.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Jan 2020 08:25:24 GMT -->
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Mirrored from coderthemes.com/ubold/layouts/default/tables-datatables.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jul 2020 07:32:15 GMT -->
+<head>
+        <meta charset="utf-8" />
+        <title>Products | Smart Innovation</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="../../../frontend_images/logo.jpg"/>
+        <meta content="Kitabharu Admin Panel" name="description" />
+        <meta content="Coderthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+
+        <%- include('../../layouts/cssfile') %>
+
+    </head>
+
+    <body class="loading">
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Topbar Start -->
+            <%- include('../../layouts/navbar') %>
+            <!-- end Topbar -->
+
+            <!-- ========== Left Sidebar Start ========== -->
+            <%- include('../../layouts/leftsidebar') %>
+            <!-- Left Sidebar End -->
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Manage Admins</a></li>
+                                            <li class="breadcrumb-item active"><%= title %></li>
+                                        </ol>
+                                    </div>
+                                    <h4 class="page-title"><%= title %></h4>
+                                </div>
+                            </div>
+                        </div>    
+         
+                        <!-- end page title --> 
+                        <div style="text-align: right;margin-bottom: 25px;">
+                            <a href="/magazine/create"><button type="button" class="btn btn-success waves-effect waves-light" style="background-color: #07ddb2;border-color: #36d7b7;"><i class="fe-plus-circle" style="font-size: 15px;padding-right: 3px;"></i> Add Magazine</button></a>
+                        </div>
+
+                        <% if(messages.success){ %>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert"  id="alertmessage">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            <%= messages.success%>
+                            </div>
+                        <% } %>
+
+                        <% if(messages.error){ %>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert"  id="alertmessage">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            <%= messages.error %>
+                            </div>
+                        <% } %> 
+                        <div class="row">
+                  
+                            <div class="col-12">
+             
+                                <div class="card">
+                                    <div class="card-body">
+                                        <!-- <h4 class="header-title">Admins List</h4>
+                                        <p class="text-muted font-13 mb-4">
+                                            DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction
+                                            function:
+                                            <code>$().DataTable();</code>. -->
+                                        </p>
+
+                                        <table id="basic-datatable" class="table dt-responsive nowrap w-100" style="font-size: 13.5px;">
+                                            <thead>
+                                                <tr>
+                                                    <th>S.N</th>
+                                                    <th>Title</th>
+                                                    <th>Image</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                        
+                                        
+                                            <tbody>
+                                   
+                                               
+                                            </tbody>
+                                        </table>
+
+                                    </div> <!-- end card body-->
+                                </div> <!-- end card -->
+                            </div><!-- end col-->
+                        </div>
+                        <!-- end row-->
+
+
+                        <!-- end row-->
+                        
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+
+        </div>
+        <!-- END wrapper -->
+
+        <!-- Right Sidebar -->
+        <%- include('../../layouts/rightsidebar') %>
+        <!-- /Right-bar -->
+
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+
+        <%- include('../../layouts/script') %>
+        
+    </body>
+
+<!-- Mirrored from coderthemes.com/ubold/layouts/default/tables-datatables.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 15 Jul 2020 07:32:18 GMT -->
+</html>

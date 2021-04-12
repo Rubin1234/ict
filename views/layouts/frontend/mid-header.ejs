@@ -1,0 +1,49 @@
+<div class="container clearfix">
+
+    <div id="logo">
+    <a href="/" class="standard-logo" data-dark-logo="../frontend_images/logo-dark.png"><img src="../../../frontend_images/logo.jpg" alt="Canvas Logo"></a>
+    <a href="/" class="retina-logo" data-dark-logo="../frontend_images/logo-dark@2x.png"><img src="../../../frontend_images/logo.jpg" alt="Canvas Logo"></a>
+    
+    
+    </div>
+    
+    
+    
+    <div class="header-search">
+        <form method="POST" action="/search" style="width: 100%;">
+        <div class="row inner-header-search">
+       
+        <input type="text" name="headersearch" id="searchProduct" class="form-control" placeholder="Search for Books, E-books & Stationary Products">
+        <button type="submit" class="btn" style="background-color: #145ba2;color:white"><i class="icon-line-search" style="font-size: 14px;" ></i>&nbsp;&nbsp;Search</button>
+   
+    </div>
+</form>
+    </div>
+    <ul class="header-extras">
+    <li style="position: relative;">
+        
+    <a href="/cart" >	
+    <i class="i-plain icon-cart nomargin" style="color: #7e706f" onclick="mycart()"><span style="background: #f13c2a;
+        color: white;
+        width: 21px;
+        height: 21px;
+        position: absolute;
+        border-radius: 50%;
+        font-size: 15.5px;
+        line-height: 1.1;
+        margin-left: 1px;
+        top: 0;
+        padding-left: 0px" id="cartproductnumber"></span></i>
+    
+    </a>
+    <div class="he-text">
+    Shopping Cart
+
+       <p><b id="cartproductnumber2"></b> Item  
+        <!-- - Rs <b id="cartProductPrice"></b> -->
+    </p>
+    </div>
+    </li>
+    
+    </ul>
+    </div>

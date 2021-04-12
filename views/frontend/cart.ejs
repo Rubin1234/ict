@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+    <%- include('../layouts/frontend/head') %>
+    <body class="stretched">
+        <div id="wrapper" class="clearfix">
+            <%- include('../layouts/frontend/top-header') %>
+            <header id="header" class="sticky-style-2">
+                <%- include('../layouts/frontend/mid-header') %>
+                <%- include('../layouts/frontend/menu') %>
+            </header>
+
+<div class="banner">
+   <div class="overlay"></div>
+  <div class="inner-banner container">
+     
+      <div class="inner-banner-title">
+           <h4>My Cart</h4>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">Home</a></li>
+            <li class="breadcrumb-item active"><a href="">My Cart</a></li>
+          </ol>
+      </div>
+     
+  </div>
+</div>
+
+<div class="listing container mt-4 mb-4">
+    <ol class="breadcrumb" >
+           <li class="breadcrumb-item"><a href="">Home</a></li>
+           <!-- <li class="breadcrumb-item "><a href="">Books</a></li> -->
+            <li class="breadcrumb-item active"><a href="">My Cart</a></li>
+         </ol>
+</div>
+
+
+<section id="content">
+    <div class="">
+    <div class="container clearfix">
+       <% if(cartProduct != null){ %>
+      <% if(cartProduct.products.length > 0 && cartProduct.products != null){ %>
+    <div class="table-responsive">
+      <form action="cart/update" method="POST" >
+
+
+   <table class="table cart">
+    <thead>
+    <tr>
+      <th class="cart-select-option">&nbsp;</th>
+    <th class="cart-product-remove">&nbsp;</th>
+    <th class="cart-product-thumbnail">&nbsp;Image</th>
+    <th class="cart-product-name">Product</th>
+    <th class="cart-product-price">Unit Price</th>
+    <th class="cart-product-quantity">Quantity</th>
+    <th class="cart-product-subtotal">Total</th>
+    </tr>
+    </thead>
+    <tbody class="cartItem">
+
+<% cartProduct.products.forEach(function(data){ %>
+    <tr class="cart_item">
+      <input type="hidden" value="<%= data.product_id._id %>" name="product_id[]">
+   
+      <% if(data.book_type != null){ %>
+         <input type="hidden" value="<%= data.booktype %>" name="book_type[]" >
+         <% }else{ %>
+            <input type="hidden" value=null name="booktype[]" >
+         <% } %>
+   
+         <% if(data.book_type != 'ebook'){ %>
+            <input type="hidden" value="<%= data.product_id.product_price %>" name="price[]" >
+            <% }else{ %>
+               <input type="hidden" value="<%= data.product_id.ebook_id.ebook_price %>" name="price[]" >
+            <% } %>
+            <td class="cart-select-option">
+               <input class="selectoption" type="checkbox" style="transform:scale(1.2)" onclick="selectItem()" cartProduct="<%= cartProduct._id %>" productId="<%= data.product_id._id %>" bookType="<%= data.booktype %>" <% if(data.selected){ %> <%= checked %> <% } %>    >
+            </td>
+      <td class="cart-product-remove">
+         <i style="font-size: 19px;" class="icon-trash2 remove" onclick="removeItem()" cartProduct="<%= cartProduct._id %>" productId="<%= data.product_id._id %>" bookType="<%= data.booktype %>"></i>
+      </td>
+  
+      <td class="cart-product-thumbnail">
+         <a href="#"><img width="64" height="64" src="images/backend/products/<%= data.product_id.product_image %>" alt="<%= data.product_id.product_name %>"></a>
+      </td>
+      <td class="cart-product-name">
+         <a href="#"><%= data.product_id.product_name %> </a>
+         
+         <% if(data.booktype == 'ebook'){ %>
+         
+         <span style="font-weight: 700;font-size: 14.5px;color: #dd3a3a;font-family: sans-serif;">(E-Book)</span>
+         <% } %>
+         <% if(data.booktype == 'paperbook'){ %>
+            <span style="font-weight: 700;font-size: 14.5px;color: #dd3a3a;font-family: sans-serif;">(Book)</span>
+            <% } %>
+            <% if(data.booktype == null){ %>
+               <span style="font-weight: 700;font-size: 14.5px;color: #dd3a3a;font-family: sans-serif;">(Stationary)</span>
+               <% } %>
+               <% if(data.product_id.discount_percent > 0){ %>
+               <div class="showdiscountpercentCart"><%= data.product_id.discount_percent%>% off</div>
+               <% } %>
+      </td>
+      <td class="cart-product-price">
+         <% if(data.booktype == 'ebook'){ %>
+
+            <% if(data.product_id.discount_percent > 0){
+               var discount_price = 0;
+               var discount_price = data.product_id.discount_percent/100 * data.product_id.ebook_id.ebook_price
+               var discountedAmount = data.product_id.ebook_id.ebook_price - discount_price
+               %>
+                  <s style="color: #848484;font-family:auto;font-size: 19px;padding-left: 10px;margin-left: auto;
+                  margin-right: auto;padding-top: 2px;">Rs <%= data.product_id.ebook_id.ebook_price %></s> &nbsp;&nbsp;
+                  <span class="amountPerProduct" amountPerProduct="<%= discountedAmount %>" style="font-weight: bold;color: #6c6c6c;">Rs  <%= discountedAmount %></span>
+               <% }else{ %>
+                  <span class="amountPerProduct" amountPerProduct="<%= data.product_id.ebook_id.ebook_price %>" style="font-weight: bold;color: #6c6c6c;">Rs  <%= data.product_id.ebook_id.ebook_price %></span>
+                  <% } %>
+        
+            <% }else{ %>
+
+               <% if(data.product_id.discount_percent > 0){
+                  var discount_price = 0;
+                  var discount_price = data.product_id.discount_percent/100 * data.product_id.product_price
+                  var discountedAmount = data.product_id.product_price - discount_price
+                  %>
+                     <s amountPerProduct="<%= discountedAmount %>" style="color: #848484;font-family:auto;font-size: 19px;padding-left: 10px;margin-left: auto;
+                     margin-right: auto;padding-top: 2px;">Rs <%= data.product_id.product_price %></s> &nbsp;&nbsp;
+                     <span class="amountPerProduct" amountPerProduct="<%= discountedAmount %>" style="font-weight: bold;color: #6c6c6c;">Rs  <%= discountedAmount %></span>
+                  <% }else{ %>
+                     <span class="amountPerProduct" amountPerProduct="<%= data.product_id.product_price %>" style="font-weight: bold;color: #6c6c6c;">Rs  <%= data.product_id.product_price %></span>
+                     <% } %>
+
+               
+                  <% } %>
+      </td>
+      <td class="cart-product-quantity">
+         <div class="quantity clearfix">
+         
+            
+            <% if(data.booktype == 'ebook'){ %>
+               <input type="button" productId="<%= data.product_id._id %>" bookType="<%= data.booktype %>" value="-" class="minus"  onclick="productNumberSub()" disabled>
+               <input type="text" name="quantity[]"  max="<%= data.product_id.product_stock %>" value="<%= data.qty %>" qty="<%= data.qty %>" class="qty" />
+               <input type="button" productId="<%= data.product_id._id %>" bookType="<%= data.booktype %>" value="+" class="plus" onclick="productNumberAdd()" disabled>
+               <% }else{ %>
+                  <input type="button" productId="<%= data.product_id._id %>" bookType="<%= data.booktype %>" value="-" class="minus"  onclick="productNumberSub()">
+                  <input type="text" name="quantity[]"  max="<%= data.product_id.product_stock %>" value="<%= data.qty %>" qty="<%= data.qty %>" class="qty" />
+                  <input type="button" productId="<%= data.product_id._id %>" bookType="<%= data.booktype %>" value="+" class="plus" onclick="productNumberAdd()">
+                  <% } %>
+  
+         </div>
+      </td>
+      <td class="cart-product-subtotal">
+         <span class="amountTotal" style="color: #145ba2;"></span>
+      </td>
+    </tr>
+<% }) %>  
+
+
+
+    
+  
+    <tr class="cart_item" style="margin-top: 10px;">
+    <td colspan="8">
+    <div class="row clearfix" style="padding-top: 15px;">
+    <!-- <div class="col-lg-4 col-4 nopadding">
+    <div class="row">
+    <div class="col-lg-8 col-7">
+    <input type="text" value="" class="sm-form-control" placeholder="Enter Coupon Code.." />
+    </div>
+    <div class="col-lg-4 col-5">
+    <a href="#" class="button button-3d button-black nomargin">Apply Coupon</a>
+    </div>
+    </div>
+    </div> -->
+    <div class="col-lg-12 col-8 nopadding">
+    <a href="/payment" onclick="proceedToCheckOut()"><b class="button button-3d notopmargin fright">Proceed to Checkout</b></a>
+    <!-- <button type="submit" class="button button-3d nomargin fright">Update Cart</button> -->
+    </div>
+    </div>
+    </td>
+    </tr>
+ 
+    </tbody>
+ 
+   </table>
+
+</form>
+    </div>
+    <br>
+    <br>
+    <div class="row clearfix" style="padding-bottom: 40px;">
+ 
+    <div class="col-lg-7 clearfix" id="padding-left" >
+    <h4 style="font-size: 25px;margin-bottom: 15px;background-color: #daeeff;padding: 6px 10px;">Cart Totals</h4>
+    <div class="table-responsive">
+    <table class="table cart">
+    <tbody>
+    <tr class="cart_item">
+    <td class="cart-product-name">
+    <strong>Cart Subtotal</strong>
+    </td>
+    <td class="cart-product-name">
+    <span class="amount font-weight-bold" style="color:#145ba2;">Rs <%= finalAmount %></span>
+    </td>
+    </tr>
+    <tr class="cart_item">
+    <td class="cart-product-name">
+    <strong>Delivery Charge</strong>
+    </td>
+    <td class="cart-product-name">
+    <span class="deliveryCharge font-weight-bold" ><%= deliveryCharge %></span>
+    </td>
+    </tr>
+    <tr class="cart_item">
+    <td class="cart-product-name">
+    <strong>Total</strong>
+    </td>
+    <td class="cart-product-name">
+    <span class="totalAmount color lead font-weight-bold"><strong>Rs <%= totalPrice %></strong></span>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    <div class="col-lg-4 clearfix" id="padding-left" >
+      <h4 style="font-size: 25px;margin-bottom: 15px;">We Accept</h4>
+      <hr>
+      <img src="frontend_images/footer/esewa.jpg" alt="" width="150px" height="100px" style="margin-right: 25px;">
+      <!-- <img src="frontend_images/footer/cod.jpg" alt="" width="80px" height="50px"> -->
+      </div>
+    </div>
+       <% }else{ %>
+         <div style="text-align: center;">
+            <img width="25%" src="images/no-products-found.png" alt="" style="margin-bottom: 25px;">
+         </div>
+   
+   <% }}else{ %>
+      <div style="text-align: center;">
+         <img width="25%" src="images/no-products-found.png" alt="" style="margin-bottom: 25px;">
+      </div>
+    <% } %>
+    </div>
+    </div>
+    </section>
+    
+
+
+
+
+
+
+
+
+
+
+    <%- include('../layouts/frontend/footer') %>
+      <!-- End Footer -->
+      <!-- Copyright -->
+      <div class=" text-center footer-bottom" >
+         <p class="mt-0 mb-0">&copy; Copyright 2020 <strong style="color: #d14031">Smart Innovation</strong>. All Rights Reserved</p>
+     <!--     <small class="mt-0 mb-0">
+         Made with <i class="mdi mdi-heart text-danger"></i> by <a target="_blank" href="https://giftechies.com/" class="text-warning">Giftechies</a>
+         </small> -->
+      </div>
+
+
+
+</div>
+<%- include('../layouts/frontend/script') %>
+</body>
+
+<!-- Mirrored from themes.semicolonweb.com/html/canvas/menu-7.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Jan 2020 08:25:24 GMT -->
+</html>

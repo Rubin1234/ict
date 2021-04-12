@@ -1,0 +1,55 @@
+<div id="header-wrap">
+
+    <nav id="primary-menu" class="style-2">
+    <div class="container clearfix">
+    <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+    <ul>
+    <li class="current"><a href="/"><div>Home</div></a>
+    
+    </li>
+    
+    <li class=""><a href="/books"><div>Books</div></a>
+        <ul>
+            <% bookSubcategories.forEach(function(data){ %>
+                <li><a href="../books/<%= data.slug%>"><div><%= data.subcategory_name %></div></a></li>
+            <% }) %>
+        </ul>
+    </li>
+    <li class=""><a href="/stationary"><div>Stationary</div></a>
+        <ul>
+            <% stationarySubcategories.forEach(function(data){ %>
+                <li><a href="../stationary/<%= data.slug%>"><div><%= data.subcategory_name %></div></a></li>
+            <% }) %>
+        </ul>
+    </li>
+    
+    <li class=""><a href="/ebooks"><div>E-Books</div></a>
+        <ul>
+        
+            <% ebookSubcategories.forEach(function(data){ %>
+               <% if(data.status == 'Active'){ %>
+                <li><a href="../ebooks/<%= data.slug%>"><div><%= data.subcategory_name %></div></a></li>
+                <% } %>
+            <% }) %>
+       
+        
+        </ul>
+    </li>
+    <li class=""><a href="/articles"><div>Articles</div></a></li>
+    <!-- <li class=""><a href="/blogs"><div>Blogs</div></a></li> -->
+    <li class=""><a href="/publications"><div>Publication</div></a></li>
+    <li class=""><a href="/videos"><div>Videos</div></a></li>
+    <li class=""><a href="/contactus"><div>Contact us</div></a></li>
+    
+    </ul>
+
+    
+    <!-- <div id="top-search">
+    <a href="#" id="top-search-trigger"><i class="icon-search3"></i><i class="icon-line-cross"></i></a>
+    <form action="http://themes.semicolonweb.com/html/canvas/search.html" method="get">
+    <input type="text" name="q" class="form-control" value="" placeholder="Type &amp; Hit Enter..">
+    </form>
+    </div> -->
+    </div>
+    </nav>
+    </div>

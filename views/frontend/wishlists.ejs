@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+    <%- include('../layouts/frontend/head') %>
+    <body class="stretched">
+        <div id="wrapper" class="clearfix">
+            <%- include('../layouts/frontend/top-header') %>
+            <header id="header" class="sticky-style-2">
+                <%- include('../layouts/frontend/mid-header') %>
+                <%- include('../layouts/frontend/menu') %>
+            </header>
+
+<div class="banner">
+   <div class="overlay"></div>
+  <div class="inner-banner container">
+     
+      <div class="inner-banner-title">
+           <h4>My Wishlist</h4>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active"><a >My Wishlist</a></li>
+          </ol>
+      </div>
+     
+  </div>
+</div>
+
+<div class="listing container mt-4 mb-4">
+    <ol class="breadcrumb" >
+           <li class="breadcrumb-item"><a href="/">Home</a></li>
+           <!-- <li class="breadcrumb-item "><a href="">Books</a></li> -->
+            <li class="breadcrumb-item active"><a href="">My Wishlist</a></li>
+         </ol>
+</div>
+
+<section id="content">
+    <div class="">
+    <div class="container clearfix">
+    <div class="table-responsive">
+      <form action="cart/update" method="POST" style="text-align: center;">
+         <% if(wishlistProduct != null){ %>
+        <% if(wishlistProduct.products.length > 0){ %>
+      
+   <table class="table cart">
+    <thead>
+    <tr>
+    <th class="cart-product-remove">&nbsp;</th>
+    <th class="cart-product-thumbnail">&nbsp;</th>
+    <th class="cart-product-name">Product</th>
+    <th class="cart-product-price">Unit Price</th>
+ 
+    <th class="cart-product-subtotal">Total</th>
+    </tr>
+    </thead>
+    <tbody class="wishlistItem">
+        <% wishlistProduct.products.forEach(function(data){ %>
+            <tr class="cart_item">
+              <input type="hidden" value="<%= data.product_id._id %>" name="product_id[]">
+           
+              <% if(data.booktype != null){ %>
+                 <input type="hidden" value="<%= data.booktype %>" name="book_type[]" >
+                 <% }else{ %>
+                    <input type="hidden" value=null name="book_type[]" >
+                 <% } %>
+           
+                 <% if(data.booktype != 'ebook'){ %>
+                    <input type="hidden" value="<%= data.product_id.product_price %>" name="price[]" >
+                    <% }else{ %>
+                       <input type="hidden" value="<%= data.product_id.ebook_id.ebook_price %>" name="price[]" >
+                    <% } %>
+        
+              <td class="cart-product-remove">
+                 <i class="icon-trash2 remove" onclick="removeWishlistItem()" cartProduct="<%= wishlistProduct._id %>" productId="<%= data.product_id._id %>"
+                  bookType="<%= data.booktype %>"
+                   ></i>
+              </td>
+              <td class="cart-product-thumbnail">
+                 <a href="#"><img width="64" height="64" src="images/backend/products/<%= data.product_id.product_image %>" alt="<%= data.product_id.product_name %>"></a>
+              </td>
+              <td class="cart-product-name">
+                 <a href="#"><%= data.product_id.product_name %> </a>
+                 
+                 <% if(data.booktype == 'ebook'){ %>
+                 
+                 <span style="font-weight: 700;font-size: 14.5px;color: #dd3a3a;font-family: sans-serif;">(E-Book)</span>
+                 <% } %>
+                 <% if(data.booktype == 'paperbook'){ %>
+                    <span style="font-weight: 700;font-size: 14.5px;color: #dd3a3a;font-family: sans-serif;">(Book)</span>
+                    <% } %>
+                    <% if(data.booktype == null){ %>
+                       <span style="font-weight: 700;font-size: 14.5px;color: #dd3a3a;font-family: sans-serif;">(Stationary)</span>
+                       <% } %>
+                       <br>
+                       <% if(data.product_id.discount_percent > 0){ %>
+                        <div class="showdiscountpercentCart mx-auto"><%= data.product_id.discount_percent%>% off</div>
+                        <% } %>
+              </td>
+              <td class="cart-product-price">
+                 <% if(data.booktype == 'ebook'){ %>
+                     <% if(data.product_id.discount_percent > 0){
+                        var discount_price = 0;
+                        var discount_price = data.product_id.discount_percent/100 * data.product_id.ebook_id.ebook_price
+                        var discountedAmount = data.product_id.ebook_id.ebook_price - discount_price
+                        %>
+                  <s style="color: #848484;font-family:auto;font-size: 19px;padding-left: 10px;margin-left: auto;
+                  margin-right: auto;padding-top: 2px;">Rs <%= data.product_id.ebook_id.ebook_price %></s> &nbsp;&nbsp;
+                 <span class="amountPerProduct" amountPerProduct="<%= data.product_id.ebook_id.ebook_price %>" >Rs  <%= discountedAmount %></span>
+                        <% }else{ %>
+                           <span class="amountPerProduct" amountPerProduct="<%= data.product_id.ebook_id.ebook_price %>" >Rs  <%= data.product_id.ebook_id.ebook_price %></span>
+                           <% } %>
+                    <% }else{ %>
+                     <% if(data.product_id.discount_percent > 0){
+                        var discount_price = 0;
+                        var discount_price = data.product_id.discount_percent/100 * data.product_id.product_price
+                        var discountedAmount = data.product_id.product_price - discount_price
+                        %>
+                     <s style="color: #848484;font-family:auto;font-size: 19px;padding-left: 10px;margin-left: auto;
+                     margin-right: auto;padding-top: 2px;">Rs <%= data.product_id.product_price %></s> &nbsp;&nbsp;
+                       <span class="amountPerProduct" amountPerProduct="<%= data.product_id.product_price %>" >Rs  <%= discountedAmount %></span>
+                       <% }else{ %>
+
+
+                        <span class="amountPerProduct" amountPerProduct="<%= data.product_id.product_price %>" >Rs  <%= data.product_id.product_price %></span>
+                       <% } %>
+                          <% } %>
+              </td>
+
+              <td class="cart-product-subtotal">
+               <% if(data.booktype == null){ %>
+                  <span type="" class="btn btn-primary" style="margin:auto;font-family: Raleway,sans-serif !important;font-size:15px;background-color: #145ba2;color: white;border-color:#145ba2;padding: 5px 10px;border-radius:0px;" productid="<%= data.product_id._id %>" onclick="addtocart()"><i class="icon-cart-plus"></i>&nbsp;&nbsp;Add to cart</span>
+                  <% } %>
+                <% if(data.booktype == 'paperbook'){ %>
+                <span type="" class="btn btn-primary" style="margin:auto;font-family: Raleway,sans-serif !important;font-size:15px;background-color: #145ba2;color: white;border-color:#145ba2;padding: 5px 10px;border-radius:0px;" productid="<%= data.product_id._id %>" onclick="addtobookcart()"><i class="icon-cart-plus"></i>&nbsp;&nbsp;Add to cart</span>
+                <% } %>
+                <% if(data.booktype == 'ebook'){ %>
+                  <span type="" class="btn btn-primary" style="    margin: auto;font-size: 15px; background-color: #145ba2;color: white;border-color: #145ba2;padding: 5px 10px;border-radius: 0px;font-family: Raleway,sans-serif !important;" productid="<%= data.product_id._id %>" onclick="addtoEbookcart()"><i class="icon-cart-plus"></i>&nbsp;&nbsp;Add to cart</span>
+                  <% } %>
+              </td>
+            </tr>
+        <% }) %>  
+    </tbody>
+   </table>
+   <% }else{ %>
+    <img width="25%" src="images/no-products-found.png" alt="">
+    <% } %>
+    <% }else{ %>
+      <img width="25%" src="images/no-products-found.png" alt="">
+      <% } %>
+</form>
+    </div>
+    <br>
+    <br>
+  
+    </div>
+    </div>
+    </section>
+    
+    <%- include('../layouts/frontend/footer') %>
+      <!-- End Footer -->
+      <!-- Copyright -->
+      <div class=" text-center footer-bottom" >
+         <p class="mt-0 mb-0">&copy; Copyright 2020 <strong style="color: #d14031">Smart Innovation</strong>. All Rights Reserved</p>
+     <!--     <small class="mt-0 mb-0">
+         Made with <i class="mdi mdi-heart text-danger"></i> by <a target="_blank" href="https://giftechies.com/" class="text-warning">Giftechies</a>
+         </small> -->
+      </div>
+
+
+
+</div>
+<%- include('../layouts/frontend/script') %>
+</body>
+
+<!-- Mirrored from themes.semicolonweb.com/html/canvas/menu-7.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Jan 2020 08:25:24 GMT -->
+</html>

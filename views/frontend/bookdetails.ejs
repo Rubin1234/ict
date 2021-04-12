@@ -1,0 +1,712 @@
+<html dir="ltr" lang="en-US">
+    <%- include('../layouts/frontend/head') %>
+    <body class="stretched">
+        <div id="wrapper" class="clearfix">
+            <%- include('../layouts/frontend/top-header') %>
+            <header id="header" class="sticky-style-2">
+                <%- include('../layouts/frontend/mid-header') %>
+                <%- include('../layouts/frontend/menu') %>
+            </header>
+
+<div class="banner">
+   <div class="overlay"></div>
+  <div class="inner-banner container">
+     
+      <div class="inner-banner-title">
+           <h4>Our Book</h4>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">Home</a></li>
+            <li class="breadcrumb-item"><a href="">Books</a></li>
+            <li class="breadcrumb-item active"><a href="">Book Details</a></li>
+          </ol>
+      </div>
+     
+  </div>
+</div>
+
+<div class="listing container mt-4 mb-4">
+     <ol class="breadcrumb" >
+            <li class="breadcrumb-item"><a href="">Home</a></li>
+            <li class="breadcrumb-item "><a href="">Books</a></li>
+             <li class="breadcrumb-item active"><a href="">
+              <% if(bookDetails.book_attribute.length > 0){ %> 
+              <%= bookDetails.book_attribute[0].author_name %></a></li>
+              <% } %>
+          </ol>
+</div>
+<a href=""></a>
+<section class="section" style="padding: 15px 0px;">
+  <div class="container detailpage">
+    <div class="row">
+     <div class="col-md-4">
+       <div class="image-description">
+       <div class="product-image">
+         <% if(bookDetails.product_image){ %>
+             <img class="mainImage block__pic"  src="../images/backend/products/<%= bookDetails.product_image %>"    alt=""  style="width: 100%;height: 375px;">
+           <% } %>
+           </div>
+       <div class="product-carousel">
+ 
+         
+      
+ 
+          <div id="oc-images" class="owl-carousel image-carousel carousel-widget" data-margin="20" data-nav="true" data-pagi="false" data-items-xs="2" data-items-sm="3" data-items-lg="4" data-items-xl="4" data-speed="400" data-loop="false" >
+           <% if(bookDetails.product_image){ %>
+             <div class="oc-item">
+               <div class="new-arrival-books">
+                   <img class="changeImage" src="../images/backend/products/<%= bookDetails.product_image %>" alt="" style="width: 100%;height: 100px;">
+               </div>
+             </div> 
+           <% } %>
+           <% if(bookDetails.images.length > 0){ %>
+           <% bookDetails.images.forEach(function(data){ %>
+               <div class="oc-item">
+                 <div class="new-arrival-books">
+                     <img class="changeImage" src="../images/backend/products/product_images/<%= data.productImage %>" alt="" style="width: 100%;height: 100px;">
+                 </div>
+               </div>
+           <% }) %>
+           <% } %>
+ </div>
+ 
+       </div>
+       </div>
+     </div>
+     <div class="col-md-7" >
+       <div class="product-details" style="padding-left: 10px;">
+         <div class="product-title">
+             <h3><%= bookDetails.product_name %> <% if(bookDetails.book_attribute.length > 0){ %> 
+               - <%= bookDetails.book_attribute[0].author_name %>
+               <% } %></h3>
+
+               <div class="progress-star" style="display: flex;margin-bottom: 9px;">
+             
+                <% for(var i=1; i<=5; i++){ %>
+                  <% if(i <= average){ %>  
+                    <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 16.25px; height: 16.25px;">
+                    <% var j=i; } %>
+                    <% } %>
+  
+              
+              <% if((average - roundOffValue) == 0.5 ){ %> 
+                  <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB13svEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 16.25px; height: 16.25px;">
+                  <% var j=j+1;  %>
+              <% } %>
+  
+              <% if((average - roundOffValue ) < 0.5 && (average - roundOffValue ) != 0 ){ %> 
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB16MwRdOqAXuNjy1XdXXaYcVXa-64-64.png" style="width: 16.25px; height: 16.25px;">
+                <% var j=j+1;  %>
+            <% } %>
+  
+            <% if((average - roundOffValue) >  0.5 ){ %> 
+              <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB14IvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 16.25px; height: 16.25px;">
+              <% var j=j+1;  %>
+          <% } %>
+  
+        
+                <% for(var k=j; k < 5; k++){ %>
+               
+                  <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB18ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 16.25px; height: 16.25px;">
+            
+                  <% } %>
+
+                  <!-- If Empty Star -->
+                  <% if(average == 0){ %>
+                    <% for(var i=1; i <= 5  ; i++){ %>
+                      <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB18ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 18.25px; height: 18.25px;display: inline-block;padding: 0px;">
+                      <% } %> 
+                    <% } %> 
+                
+                  <% if(bookDetails.discount_percent > 0){ %>
+                    <div class="showdiscountpercentBookDetail"><%= bookDetails.discount_percent %>% off</div>
+                    <% } %>
+
+               
+              </div>
+             <!-- <div style="text-align: right;">
+               <button type="" class="btn btn-primary" style="margin:auto;font-size:15px;background-color: #a21476;color: white;border-color:#a21476;padding: 5px 10px;border-radius:0px;" data-toggle="tooltip" title="Add to wishlist"><i class="icon-heart1"></i></button>
+                   </div> -->
+         <hr>
+              <!-- <% if(bookDetails.book_attribute.length > 0){ %>  <h5 class="by">By :
+               <%= bookDetails.book_attribute[0].author_name %></h5>
+               <% } %> -->
+              
+         </div>
+      
+         <div class="product-addtocart row">
+ 
+       <% if(bookDetails.book_type == 'paperbook' || bookDetails.book_type == 'both'){ %>
+         <div class="col-md-7">
+           <div class="col-md-12">
+             <h4 style="margin-bottom: 15px;font-size: 35px; text-transform: uppercase;font-family: sans-serif;">Paperbook</h4>
+               
+
+             <% if(bookDetails.discount_percent > 0){
+              var discount_price = 0;
+              var discount_price = bookDetails.discount_percent/100* bookDetails.product_price
+              var discountedAmount = bookDetails.product_price - discount_price
+              %>
+              <h3 style="font-family: sans-serif;font-size: 22px;">Price: 
+               
+                
+                <s style="color: #848484;font-family:auto;font-size: 20px;padding-left: 10px;margin-left: auto;
+                 margin-right: auto;padding-top: 2px;">Rs <%= bookDetails.product_price %></s> 
+                 &nbsp;<span class="text-danger"  style="color:#f3cd11 !important;">Rs <%= discountedAmount %></span></h3>
+              <% }else{ %>
+                    
+               <h3 style="font-family: sans-serif;font-size: 22px;">Price: 
+               
+              
+                &nbsp;<span class="text-danger"  style="color:#f3cd11 !important;">Rs <%= bookDetails.product_price %></span></h3>
+                <% } %>
+
+           </div>
+               <div  class="col-md-12">
+                   <div class="quantity clearfix">
+                     <input type="button" value="-" class="minus" id="booknumberminus">
+                     <input type="text" step="1" min="1" id="booknumber" max="<%= bookDetails.product_stock %>" name="quantity" value="1" title="Qty" class="qty" size="4" disabled>
+                     <input type="button" value="+" class="plus" id="booknumberplus">
+                   </div>
+                   <h5 style="margin-bottom: 45px;">Availability: <span><%= bookDetails.product_stock %> items left.</span></h5>
+     
+                 </div>
+               <div class="col-md-12">
+                 <button type="" class="btn btn-primary" style="margin:auto;font-size:15px;background-color: #145ba2;color: white;border-color:#145ba2;padding: 5px 10px;border-radius:0px;"  productId="<%= bookDetails.id %>" onclick="addtobookcart()"><i class="icon-cart-plus"></i>&nbsp;&nbsp;Add to cart</button>
+                 <button type="" class="btn btn-primary" style="margin:auto;font-size:16px;background-color: #f3cd11;color: white;border-color:#f3cd11;padding: 5px 10px;border-radius:0px;" data-toggle="tooltip" title="Add to wishlist" productId="<%= bookDetails.id %>" onclick="addtobookwishlist()"><i class="icon-heart1"></i></button>
+                </div>
+         </div>
+ 
+ <% } %>
+ 
+ <% if(bookDetails.book_type == 'ebook' || bookDetails.book_type == 'both'){ %>
+   <div class="col-md-5" >
+ 
+     <div class="col-md-12">
+     <h4 style="margin-bottom: 15px;font-size: 35px; text-transform: uppercase;font-family: sans-serif;">E-Book</h4>
+
+     <% if(bookDetails.discount_percent > 0){
+      var discount_price = 0;
+      var discount_price = bookDetails.discount_percent/100* bookDetails.ebook_id.ebook_price
+      var discountedAmount = bookDetails.ebook_id.ebook_price - discount_price
+      %>
+      <h3 style="font-family: sans-serif;font-size: 22px;">Price: 
+       
+        
+        <s style="color: #848484;font-family:auto;font-size: 20px;padding-left: 10px;margin-left: auto;
+         margin-right: auto;padding-top: 2px;">Rs <%= bookDetails.ebook_id.ebook_price %></s> 
+         &nbsp;<span  style="color: #f3cd11 !important;">Rs <%= discountedAmount %></span></h3>
+      <% }else{ %>
+        <h3 style="font-family: sans-serif;font-size: 22px;">Price:
+          <span  style="color:#f3cd11 !important;">Rs <%= bookDetails.ebook_id.ebook_price %></span>
+         </h3>
+        <% } %>
+
+
+
+       
+     </div>
+         <!-- <div  class="col-md-12">
+             <div class="quantity clearfix">
+               <input type="button" value="-" class="minus">
+               <input type="text" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="qty" size="4">
+               <input type="button" value="+" class="plus">
+             </div>
+         
+ 
+           </div> -->
+         <div class="col-md-12">
+ 
+           <button type=""  class="btn btn-primary" style="margin:auto;font-size:15px;background-color: #145ba2;color: white;border-color:#145ba2;padding: 5px 10px;border-radius:0px;" productId="<%= bookDetails.id %>" onclick="addtoEbookcart()"><i class="icon-cart-plus"></i>&nbsp;&nbsp;Add to cart</button>
+           <button type="" class="btn btn-primary" style="margin:auto;font-size:16px;background-color: #f3cd11;color: white;border-color:#f3cd11;padding: 5px 10px;border-radius:0px;" data-toggle="tooltip" title="Add to wishlist" productId="<%= bookDetails.id %>" onclick="addtoEbookwishlist()"><i class="icon-heart1"></i></button>
+         </div>
+   </div>
+ 
+ 
+           <!-- <div class="col-md-6">
+        <div class="buybook">
+                 <h4 style="margin-bottom: 5px;font-size: 25px;">E-Book</h4>
+                 <h3 style="margin-bottom: 15px;font-family: auto;">Rs <%= bookDetails.ebook_id.ebook_price %></h3>
+                 <div  class="row" style="margin: auto;">
+                   <div class="quantity clearfix">
+ <input type="button" value="-" class="minus">
+ <input type="text" step="1" min="1" name="quantity" value="1" title="Qty" class="qty" size="4">
+ <input type="button" value="+" class="plus">
+ </div>
+                   <button type="" class="btn btn-primary" style="margin:auto;font-size:15px;background-color: #145ba2;color: white;border-color:#145ba2;padding: 5px 10px;border-radius:0px; "><i class="icon-cart-plus"></i>&nbsp;&nbsp;Add to cart</button>
+                 </div>
+             </div>
+           </div> -->
+           <% } %>  
+         </div>
+          <div class="description">
+               <h4>Description</h4>
+               <table style="width: 80%;line-height: 1.7;">
+                 <tr>
+                   <td style="font-weight: bold;font-size: 17px;">Publisher:</td>
+                   <td style="    font-size: 15px;">
+                     <% if(bookDetails.book_attribute.length > 0){ %>
+                     <%= bookDetails.book_attribute[0].publication %>
+                     <% } %>
+                   </td>
+                 </tr>
+                  <tr>
+                   <td style="font-weight: bold;font-size: 17px;">Genre:</td>
+                   <td style="    font-size: 15px;">
+                     <% if(bookDetails.book_attribute.length > 0){ %>
+                     <%= bookDetails.subcategory_id.subcategory_name %>
+                     <% } %>
+                   </td>
+                 </tr>
+                   <tr>
+                   <td style="font-weight: bold;font-size: 17px;">Language:  </td>
+                   <td style="    font-size: 15px;">
+                     <% if(bookDetails.book_attribute.length > 0){ %>
+                     <%= bookDetails.book_attribute[0].language %>
+                     <% } %>
+                   </td>
+                 </tr>
+                    <tr>
+                   <td style="font-weight: bold;font-size: 17px;">Published:  </td>
+                   <td style="    font-size: 15px;">
+                     <% if(bookDetails.book_attribute.length > 0){ %>
+                     <%= bookDetails.book_attribute[0].published_year %>
+                     <% } %>
+                   </td>
+                 </tr>
+                     <tr>
+                   <td style="font-weight: bold;font-size: 17px;">Total Pages:  </td>
+                   <td style="    font-size: 15px;">
+                     <% if(bookDetails.book_attribute.length > 0){ %>
+                     <%= bookDetails.book_attribute[0].total_pages %>
+                     <% } %>
+                   </td>
+                 </tr>
+               </table>
+            </div>
+           
+       </div>
+     </div>
+    </div>
+
+    <div class="aboutthebook" style="margin-bottom: 50px;margin-top: 30px;">
+      <h3 style="margin-bottom: 0px;">Book Details</h3>
+      <hr>
+      <p style="font-size: 16px;color: #616161;line-height: 1.8;"><%= bookDetails.product_description %></p>
+    </div>
+  
+
+    <div class="rating" style="margin-bottom: 65px;margin-top: 65px;">
+      <h3 style="margin-bottom: 0px;">Rating</h3>
+      <hr>
+
+      <div class="row">
+        <div class="col-md-4 rating-star">
+          <div class="score">
+            <span class="score-average"><%= average %></span>
+            <span class="score-max">/5</span>  
+          </div>
+          <div class="average">
+            <div class="container-star " style="width: 100%;margin-bottom: 9px;">
+
+              <% for(var i=1; i<=5; i++){ %>
+                <% if(i <= average){ %>  
+                  <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 33.25px; height: 33.25px;">
+                  <% var j=i; } %>
+                  <% } %>
+
+            
+            <% if((average - roundOffValue) == 0.5 ){ %> 
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB13svEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 33.25px; height: 33.25px;">
+                <% var j=j+1;  %>
+            <% } %>
+
+            <% if((average - roundOffValue ) < 0.5 && (average - roundOffValue ) != 0 ){ %> 
+              <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB16MwRdOqAXuNjy1XdXXaYcVXa-64-64.png" style="width: 33.25px; height: 33.25px;">
+              <% var j=j+1;  %>
+          <% } %>
+
+          <% if((average - roundOffValue) >  0.5 ){ %> 
+            <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB14IvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 33.25px; height: 33.25px;">
+            <% var j=j+1;  %>
+        <% } %>
+
+      
+              <% for(var k=j; k < 5; k++){ %>
+             
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB18ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 33.25px; height: 33.25px;">
+          
+                <% } %>
+
+              <!-- <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 33.25px; height: 33.25px;">
+              <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 33.25px; height: 33.25px;">
+              <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 33.25px; height: 33.25px;">
+              <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB17MwRdOqAXuNjy1XdXXaYcVXa-64-64.png" style="width: 33.25px; height: 33.25px;"> -->
+
+            </div>
+        
+            <span style="padding-top: 5px;font-weight: bold;"><%= reviews.length %> Ratings</span>
+          </div>
+
+          <% if(eligibleForRateNow){ %>
+            <button class="form-control ratenowBtn"  data-toggle="modal"  onclick="showRatingModal()">Rate Now !!!</button>
+          <% } %>
+        
+          <span id="productSlug" value="<%= bookDetails.slug %>"></span>
+          <span id="productID" value="<%= bookDetails._id %>"></span>
+          <span id="booktype" value="<%= bookDetails.book_type %>"></span>
+
+          
+          <!-- Modal -->
+          <div class="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="exampleModalLongTitle">Ratings & Comments</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+
+
+                </div>
+
+                <div class="modal-footer">
+                  <!-- <button type="button" class="btn btn-danger" style=" font-size: 16px;color: white;display: inline-block;margin-bottom: 7px;background: #f13b3b;border: 1px solid #f13b3b;" onclick="closeRatingModal()">Close</button> -->
+                  <button type="button" class="btn btn-primary" id="postNowBtn" style="font-size: 16px;color: white;display: inline-block;margin-bottom: 7px;background: #145ba2;border: 1px solid #145ba2;" onclick="postReview()">Post Now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+
+        <div class="col-md-6 rating-details" style="line-height: 2;">
+          <ul>
+            <li>
+              <div class="progress-star" style="display: inline-block;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+              </div>
+              <span class="progress-wrap">
+                <div class="pdp-review-progress">
+                  <div class="bar bg"></div>
+                  <div class="bar fg" style="width: 60%;"></div>
+                </div>
+              </span>
+              <span class="percent"><%= countFiveStar.length %></span>
+            </li>
+            <li>
+              <div class="progress-star" style="display: inline-block;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB18ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+              </div>
+              <span class="progress-wrap">
+                <div class="pdp-review-progress">
+                  <div class="bar bg"></div>
+                  <div class="bar fg" style="width: 70%;"></div>
+                  </div>
+              </span>
+              <span class="percent"><%= countFourStar.length %></span>
+            </li>
+            <li>
+              <div class="progress-star" style="display: inline-block;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB18ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB18ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+              </div>
+              <span class="progress-wrap">
+                <div class="pdp-review-progress">
+                  <div class="bar bg"></div>
+                  <div class="bar fg" style="width: 20%;"></div>
+                  </div>
+              </span>
+              <span class="percent"><%= countThreeStar.length %></span>
+            </li>
+            <li>
+              <div class="progress-star" style="display: inline-block;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB18ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB18ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB18ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+              </div>
+              <span class="progress-wrap">
+                <div class="pdp-review-progress">
+                  <div class="bar bg"></div>
+                  <div class="bar fg" style="width: 30%;"></div>
+                  </div>
+              </span>
+              <span class="percent"><%= countTwoStar.length %></span>
+            </li>
+            <li>
+              <div class="progress-star" style="display: inline-block;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB18ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB18ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB18ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+                <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB18ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 15.96px; height: 15.96px;">
+              </div>
+              <span class="progress-wrap">
+                <div class="pdp-review-progress">
+                  <div class="bar bg" ></div>
+                  <div class="bar fg" style="width: 50%;"></div>
+                  </div>
+              </span>
+              <span class="percent"><%= countOneStar.length %></span>
+            </li>
+          </ul>
+      </div>
+      </div>
+    
+      
+    </div>
+
+
+    <div class="reviewandcomment">
+      <h3 style="margin-bottom: 0px;">Review & Comments</h3>
+      <hr>
+      <div class="commentsection">
+        <% if(reviews.length > 0){ %>
+          <% reviews.forEach(function(data,index){ %>
+            <div class="item">
+         
+              <% if(data.customer_id._id == cookiesCustomerId){ %>
+              <div class="commentOption" style="text-align: right;" reviewId = "<%= data._id %>" onclick="deleteComment()"><p >Delete</p> </div>
+              <% } %>
+                <div class="top">
+                  <span style="margin-bottom: 0px;float:right;"><%= dateArray[index] %></span>
+                  <div class="progress-star" style="display: inline-block;margin-bottom: 9px;">
+                    <% for(var i = 1; i<=5; i++ ){ %>
+                      <% if(i <= data.rating_star){ %>
+                        <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 16.96px; height: 16.96px;">
+                      <% }else{ %>
+                        <img class="star" src="//laz-img-cdn.alicdn.com/tfs/TB18ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png" style="width: 16.96px; height: 16.96px;">
+                      <% } %>
+                    
+                   
+                   
+                    <% } %>
+                  </div>
+                  <p style="margin-bottom: 5px;">
+                   <%= data.comment %>
+                  </p>
+                  <span>By: <%= data.customer_id.user_name %></span>
+                </div>
+                <div class="middle"></div>
+                <hr>
+            </div>
+          
+          <% }) %>
+        <% }else{ %>
+          <h5>No Comments Available.</h5>
+        <% } %>
+
+      </div>
+
+   
+    </div>
+ 
+  </div> 
+ </section>
+ 
+ <section class="section">
+   <div class="container">
+ 
+       <div class="section-inner">
+       <div class="section-title">
+         <h3>Other Books</h3>
+       </div>
+       <div class="section-viewall">
+             <button class="btn btn-success">View All</button> 
+       </div>
+      
+     </div>
+ 
+ 
+  <div id="oc-images" class="owl-carousel image-carousel carousel-widget" data-margin="20" data-nav="true" data-pagi="false" data-items-xs="2" data-items-sm="3" data-items-lg="4" data-items-xl="5" data-speed="400">
+ <div class="oc-item">
+      <div class="new-arrival-books">
+           <img src="../frontend_images/books/9789937905831-thumbnail-175x255-70.jpg" alt="" style="width: 100%;height: 235px;">
+            <div class="new-arrival-books-desc">
+            
+             <h4><विनोद चौधरी></h4>
+              <span style="font-size: 14px;color: #8b8b8b">Sameer Awale</span>
+             <div class="price-box">
+                  <h4>Rs. 1100</h4>
+             </div>
+           </div>
+                <div class="view-book">
+             <button type="" class="form-control"><i class="icon-line-eye"></i>&nbsp;&nbsp;View Details</button>
+             <button type="" class="form-control"><i class="icon-cart-plus"></i>&nbsp;&nbsp;Add to Cart</button>
+           </div>
+         </div>
+ </div>
+ <div class="oc-item">
+         <div class="new-arrival-books">
+           <img src="../frontend_images/books/Tyes_Bakhat_ko_Nepal_-_Part_1_to_5_-_Bhim_Bahadur_Pandey-thumbnail-175x255-70.jpg" alt="" style="width: 100%;height: 235px;">
+           <div class="new-arrival-books-desc">
+           <h4>त्यस बखतको नेपाल</h4>
+              <span style="font-size: 14px;color: #8b8b8b">Sameer Awale</span>
+             <div class="price-box">
+ 
+                  <h4>Rs. 1100</h4>
+             </div> 
+           </div>
+           <div class="view-book">
+             <button type="" class="form-control"><i class="icon-line-eye"></i>&nbsp;&nbsp;View Details</button>
+             <button type="" class="form-control"><i class="icon-cart-plus"></i>&nbsp;&nbsp;Add to Cart</button>
+           </div>
+         </div>
+ </div>
+ <div class="oc-item">
+      <div class="new-arrival-books">
+           <img src="../frontend_images/books/Durbarko_Dukhanta-thumbnail-175x255-70.jpg" alt="" style="width: 100%;height: 235px;">
+            <div class="new-arrival-books-desc">
+            
+             <h4>दरबारको दुःखान्त</h4>
+              <span style="font-size: 14px;color: #8b8b8b">Sameer Awale</span>
+             <div class="price-box">
+                  <h4>Rs. 1100</h4>
+             </div>
+           </div>
+                <div class="view-book">
+             <button type="" class="form-control"><i class="icon-line-eye"></i>&nbsp;&nbsp;View Details</button>
+             <button type="" class="form-control"><i class="icon-cart-plus"></i>&nbsp;&nbsp;Add to Cart</button>
+           </div>
+         </div>
+ </div>
+ <div class="oc-item">
+       <div class="new-arrival-books">
+           <img src="../frontend_images/books/_Sambandhaharu_By_Vijay_Kumar-thumbnail-175x255-70.jpg" alt="" style="width: 100%;height: 235px;">
+            <div class="new-arrival-books-desc">
+           <!--    <span>Auther: Rozen Awale</span> -->
+             <h4>सम्बन्धहरु</h4>
+             <span style="font-size: 14px;color: #8b8b8b"> Aileen Nedd</span>
+             <div class="price-box">
+                  <h4>Rs. 1500</h4>
+             </div>
+           </div>
+ 
+ 
+            <div class="view-book">
+             <button type="" class="form-control"><i class="icon-line-eye"></i>&nbsp;&nbsp;View Details</button>
+             <button type="" class="form-control"><i class="icon-cart-plus"></i>&nbsp;&nbsp;Add to Cart</button>
+           </div>
+         </div>
+ </div>
+ <div class="oc-item">
+         <div class="new-arrival-books">
+           <img src="https://cdn.shopify.com/s/files/1/0359/5979/9852/products/shop-new-40_grande.jpg?v=1587119146" alt="" style="width: 100%;height: 235px;">
+            <div class="new-arrival-books-desc">
+             <h4>The Stage By Cabin</h4>
+                 <span style="font-size: 14px;color: #8b8b8b"> Aileen Nedd</span>
+             <div class="price-box">
+                  <h4>Rs. 1500</h4>
+             </div>
+           </div>
+            <div class="view-book">
+             <button type="" class="form-control"><i class="icon-line-eye"></i>&nbsp;&nbsp;View Details</button>
+             <button type="" class="form-control"><i class="icon-cart-plus"></i>&nbsp;&nbsp;Add to Cart</button>
+           </div>
+         </div>
+ </div>
+ <div class="oc-item">
+      <div class="new-arrival-books">
+           <img src="../frontend_images/books/Atikramanko_Chapetama_Limpiyadhura_Lipulek_by_Ratan_Bhandari_-_front-thumbnail-175x255-70.jpg" alt="" style="width: 100%;height: 235px;">
+            <div class="new-arrival-books-desc">
+            
+             <h4>अतिक्रमणको चपेटामा लिम्पियाधुरा-लिपुलेक</h4>
+              <span style="font-size: 14px;color: #8b8b8b">Sameer Awale</span>
+             <div class="price-box">
+                  <h4>Rs. 1100</h4>
+             </div>
+           </div>
+                <div class="view-book">
+             <button type="" class="form-control"><i class="icon-line-eye"></i>&nbsp;&nbsp;View Details</button>
+             <button type="" class="form-control"><i class="icon-cart-plus"></i>&nbsp;&nbsp;Add to Cart</button>
+           </div>
+         </div>
+ </div>
+ <div class="oc-item">
+      <div class="new-arrival-books">
+           <img src="../frontend_images/books/Ranahar-front-thumbnail-175x255-70.jpg" alt="" style="width: 100%;height: 235px;">
+            <div class="new-arrival-books-desc">
+            
+             <h4>रणहार</h4>
+              <span style="font-size: 14px;color: #8b8b8b">Sameer Awale</span>
+             <div class="price-box">
+                  <h4>Rs. 1100</h4>
+             </div>
+           </div>
+                <div class="view-book">
+             <button type="" class="form-control"><i class="icon-line-eye"></i>&nbsp;&nbsp;View Details</button>
+             <button type="" class="form-control"><i class="icon-cart-plus"></i>&nbsp;&nbsp;Add to Cart</button>
+           </div>
+         </div>
+ </div>
+ <div class="oc-item">
+           <div class="new-arrival-books">
+           <img src="../frontend_images/books/Kumari_Prashnaharu_by_Durga_Karki_-_front-thumbnail-175x255-70.jpg" alt="" style="width: 100%;height: 235px;">
+            <div class="new-arrival-books-desc">
+             <h4>कुमारी प्रश्नहरु</h4>
+                 <span style="font-size: 14px;color: #8b8b8b"> Aileen Nedd</span>
+             <div class="price-box">
+                  <h4>Rs. 1500</h4>
+             </div>
+           </div>
+            <div class="view-book">
+             <button type="" class="form-control"><i class="icon-line-eye"></i>&nbsp;&nbsp;View Details</button>
+             <button type="" class="form-control"><i class="icon-cart-plus"></i>&nbsp;&nbsp;Add to Cart</button>
+           </div>
+         </div>
+ </div>
+ </div>
+   </div>
+ </section>
+
+
+ 
+ <%- include('../layouts/frontend/footer') %>
+      <!-- End Footer -->
+      <!-- Copyright -->
+      <div class=" text-center footer-bottom" >
+         <p class="mt-0 mb-0">&copy; Copyright 2020 <strong style="color: #d14031">Smart Innovation</strong>. All Rights Reserved</p>
+     <!--     <small class="mt-0 mb-0">
+         Made with <i class="mdi mdi-heart text-danger"></i> by <a target="_blank" href="https://giftechies.com/" class="text-warning">Giftechies</a>
+         </small> -->
+      </div>
+
+
+
+</div>
+
+
+<%- include('../layouts/frontend/script') %>
+<!-- <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> -->
+
+
+    <script src="../frontend_js/zoomsl.js"></script>
+    <script src="../frontend_js/script.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+     $('.changeImage').click(function(){
+      var img = $(this).attr('src');
+      $('.mainImage').attr('src',img);
+  });
+
+  });
+ 
+</script>
+</body>
+
+<!-- Mirrored from themes.semicolonweb.com/html/canvas/menu-7.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Jan 2020 08:25:24 GMT -->
+</html>

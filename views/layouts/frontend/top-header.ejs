@@ -1,0 +1,41 @@
+<div id="loader">
+    <img src="../../../frontend_images/loader/loading_blue.gif">
+  </div>
+
+
+
+<div id="top-bar">
+    <div class="container clearfix">
+      <div class="row" >
+        <div class="col-xl-6 col-lg-8 col-md-9">
+          <div class="top-links">
+            <ul>
+              <li><a><i class="icon-location"  style="color: #145ba2"></i>&nbsp;<%= setting.location %></a></li>
+              <li><a><i class="icon-email3"  style="color: #145ba2;"></i>&nbsp;<%= setting.email %></a></li>
+              <li><a><i class="icon-call"  style="color: #145ba2"></i>&nbsp;+<%= setting.contact %></a></li>
+            </ul>
+            </div>
+        </div>
+        <div class="col-xl-6 col-lg-4 col-md-3">
+          <div id="top-social">
+            <ul style="display: flex;">
+              <li style="margin-left: auto;"><a href="/wishlists" class="si" ><i class="icon-line-heart" style="color: #145ba2"></i>&nbsp;&nbsp;<span class="wishlistspan">My Wishlist </span><span style="color: #f13c2a;">(<span style="color: #f13c2a;" id="wishlistproductnumber">0</span>)</span></a></li>
+                <% if(cookiesCustomerToken){ %>
+                  <li class="dropdown">
+                    <a href="#" class="si"><i class="icon-user-alt" style="color: #145ba2"></i>&nbsp;&nbsp;<%= cookiesCustomerEmail %></a>
+                    <ul class="dropdown-content">
+                      <a href="/customer/accountsetting"><i class="icon-key1" style="color: #145ba2"></i>&nbsp;&nbsp;&nbsp;Setting</a>
+                    </ul>
+                  </li>
+                  <li><a href="/orders" class="si"><i class="icon-long-arrow-down" style="color: #145ba2"></i>&nbsp;&nbsp;orders</a></li>
+                  <li><a href="/customer/logout" class="si"><i class="icon-key1" style="color: #145ba2"></i>&nbsp;&nbsp;&nbsp;logout</a></li>
+                <%}else{ %>
+                  <li><a href="/customer/login" class="si"><i class="icon-user-alt" style="color: #145ba2"></i>&nbsp;&nbsp;<span class="wishlistspan">Login</span></a></li>
+                  <li><a href="/customer/login" class="si"><i class="icon-key1" style="color: #145ba2"></i>&nbsp;&nbsp;<span class="wishlistspan">Register</span></a></li>
+                <% } %>  
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>

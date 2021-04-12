@@ -1,0 +1,72 @@
+<html dir="ltr" lang="en-US">
+    <%- include('../layouts/frontend/head') %>
+    <body class="stretched">
+        <div id="wrapper" class="clearfix">
+            <%- include('../layouts/frontend/top-header') %>
+            <header id="header" class="sticky-style-2">
+                <%- include('../layouts/frontend/mid-header') %>
+                <%- include('../layouts/frontend/menu') %>
+            </header>
+
+<!-- <div class="banner">
+   <div class="overlay"></div>
+  <div class="inner-banner container">
+     
+      <div class="inner-banner-title">
+           <h4>Our Articles</h4>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">Home</a></li>
+            <li class="breadcrumb-item active"><a href="">Articles</a></li>
+          </ol>
+      </div>
+     
+  </div>
+</div>
+ -->
+
+ <section class="section status" style="width: 100%;">
+    <div class="container mx-auto">
+        <div class="status-box col-md-10 mx-auto">
+            <div class="d-flex mb-5 justify-between">
+                <h3 class="font-weight-bold">Track delivery status</h3>
+                <p class="ml-auto bg-white py-1 px-4 text-success" style="border-radius: 5px;font-size: 16px;color: #145ba2 !important;font-weight: bold;"><%= orderData._id %></p>
+            
+            <input id="hiddenInput" type="hidden" value="<%= JSON.stringify(orderData) %>">
+            </div>
+            <ul>
+                <li class="status_line display-5" style="padding-bottom: 4.5rem!important;" data-status="order_placed"><span>Order Placed</span></li>
+                <li class="status_line display-5" style="padding-bottom: 4.5rem!important;" data-status="confirmed"><span>Order Confirmation</span></li>
+                <li class="status_line display-5" style="padding-bottom: 4.5rem!important;" data-status="prepared"><span>Preparation</span></li>
+                <li class="status_line display-5" style="padding-bottom: 4.5rem!important;" data-status="delivered"><span>Out For Delivery</span></li>
+                <li class="status_line display-5" data-status="completed"><span>Complete</span></li>
+            </ul>
+            </div>
+        </div>
+    </div> 
+   </section>
+
+
+
+
+   <%- include('../layouts/frontend/footer') %>
+      <!-- End Footer -->
+      <!-- Copyright -->
+      <div class=" text-center footer-bottom" >
+         <p class="mt-0 mb-0">&copy; Copyright 2020 <strong style="color: #d14031">Smart Innovation</strong>. All Rights Reserved</p>
+     <!--     <small class="mt-0 mb-0">
+         Made with <i class="mdi mdi-heart text-danger"></i> by <a target="_blank" href="https://giftechies.com/" class="text-warning">Giftechies</a>
+         </small> -->
+      </div>
+
+
+
+</div>
+
+<div id="gotoTop" class="icon-angle-up"></div>
+
+
+<%- include('../layouts/frontend/script') %>
+</body>
+
+<!-- Mirrored from themes.semicolonweb.com/html/canvas/menu-7.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 11 Jan 2020 08:25:24 GMT -->
+</html>

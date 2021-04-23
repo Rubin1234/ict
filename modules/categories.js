@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 mongoose.connect('mongodb+srv://smart123123:smart123123@cluster0.xyi6x.mongodb.net/ict?retryWrites=true&w=majority', {useNewUrlParser: true, useCreateIndex: true,useUnifiedTopology: true});
-var conn = mongoose.connection;
 var Schema = mongoose.Schema; 
 
 var  categorySchema = new Schema({

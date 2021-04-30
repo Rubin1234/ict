@@ -205,6 +205,11 @@ var settingModel = require('../../modules/setting');
     
   });
 
+
+
+
+
+
   router.get('/updated/add',async function(req, res, next){
       var totalQuantity = req.query.totalQuantity;
       var productId = req.query.productId;
@@ -314,6 +319,7 @@ var settingModel = require('../../modules/setting');
             });
       });
   });
+
 
 
   router.get('/updated/sub',async function(req, res, next){

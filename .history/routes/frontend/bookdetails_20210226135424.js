@@ -168,6 +168,11 @@ var settingModel = require('../../modules/setting');
     });
   });
 
+
+
+
+
+
   router.get('/savereview',function(req,res,next){
       var comment = req.query.comment;
       var starCount = req.query.starCount;
@@ -233,6 +238,7 @@ var settingModel = require('../../modules/setting');
       res.send();
 
   });
+
 
   router.get('/ratenow',function(req,res,next){
     var productSlug = req.query.productSlug;

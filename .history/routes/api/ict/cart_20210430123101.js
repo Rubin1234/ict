@@ -318,7 +318,6 @@ router.post('/viewcart',cors(), function(req,res,next){
          
               //For Showing Item Number
               productItemNumber += parseInt(doc.qty);
-              resolve(productItemNumber);
           }));
         
         Promise.all(promises)

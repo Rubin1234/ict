@@ -62,6 +62,7 @@ router.get('/', function(req, res, next) {
               var finalAmount = 0;
               data4.products.forEach(function(doc){ 
             
+
                 //For Showing Item Number
                 productItemNumber += parseInt(doc.qty);
     

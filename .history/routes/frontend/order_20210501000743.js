@@ -45,6 +45,8 @@ router.get('/', async function(req, res, next) {
     var orderID = object_url.query.oid;
     var amount = object_url.query.amt;
     var refId = object_url.query.refId;
+
+
     var cookiesCustomerId = req.cookies.customerId;
     var customerProducts = await cartModel.findOne({customer_id : cookiesCustomerId}).populate({path: 'products.product_id',model: 'product', populate : { path: 'ebook_id', model: 'ebook' }})
 

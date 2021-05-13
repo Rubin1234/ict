@@ -43,6 +43,7 @@
 
 
             <form action="/payment/store" method="POST" onsubmit="proceedPayment()">
+         <!-- <form action="https://uat.esewa.com.np/epay/main" method="POST" onsubmit="proceedPayment()"> -->
             <input value="<%= total %>" name="tAmt" type="hidden">
             <input value="<%= finalAmount %>" name="amt" type="hidden">
             <input value="<%= taxCharge %>" name="txAmt" type="hidden">

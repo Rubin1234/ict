@@ -1092,6 +1092,7 @@ const sliderModel = require('../../modules/slider');
   });
 
 
+
   router.get('/mycart',async function(req,res,next){
  
       var cookiesCustomerToken = req.cookies.customerToken;
